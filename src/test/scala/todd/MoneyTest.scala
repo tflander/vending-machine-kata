@@ -49,13 +49,13 @@ class MoneyTest extends FunSpec with ShouldMatchers {
       Coin(ROUND, size=17.90, weight=2.27).valid should be(false)
     }
     
-//    it("rejects a heavy dime") {
-//      Coin(ROUND, size=24.26, weight=5.68).valid should be(false)      
-//    }
-//    
-//    it("rejects a light dime") {
-//      Coin(ROUND, size=24.26, weight=5.66).valid should be(false)      
-//    }
+    it("rejects a heavy dime") {
+      Coin(ROUND, size=17.91, weight=2.28).valid should be(false)
+    }
+    
+    it("rejects a light dime") {
+      Coin(ROUND, size=17.91, weight=2.26).valid should be(false)
+    }
     
   }  
 }
