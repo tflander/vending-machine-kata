@@ -56,6 +56,34 @@ class MoneyTest extends FunSpec with ShouldMatchers {
     it("rejects a light dime") {
       Coin(ROUND, size=17.91, weight=2.26).valid should be(false)
     }
+  }
+  
+  describe("nickel validation tests") {
     
+    it("identifies a nickel") {
+      Coin(ROUND, size=21.21, weight=5.00).valid should be(true)
+    }
+
+    // TODO: nickel tests
+//    it("rejects a non-round nickel") {
+//      Coin(NON_ROUND, size=17.91, weight=2.27).valid should be(false)      
+//    }
+//    
+//    it("rejects a big nickel") {
+//      Coin(ROUND, size=17.92, weight=2.27).valid should be(false)
+//    }
+//    
+//    it("rejects a small nickel") {
+//      Coin(ROUND, size=17.90, weight=2.27).valid should be(false)
+//    }
+//    
+//    it("rejects a heavy nickel") {
+//      Coin(ROUND, size=17.91, weight=2.28).valid should be(false)
+//    }
+//    
+//    it("rejects a light nickel") {
+//      Coin(ROUND, size=17.91, weight=2.26).valid should be(false)
+//    }
+//    
   }  
 }

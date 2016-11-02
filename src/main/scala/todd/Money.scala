@@ -32,6 +32,8 @@ case class Coin(shape: CoinShape, size: Double, weight: Double) {
       weight == 5.67
     } else if (size == 17.91) {
       weight == 2.27
+    } else if (size == 21.21) {
+      true
     } else false
   }
 }
