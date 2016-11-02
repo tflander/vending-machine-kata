@@ -1,4 +1,4 @@
-name := """minimal-scala"""
+name := """vending-machine-kata"""
 
 version := "1.0"
 
