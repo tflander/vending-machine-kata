@@ -13,6 +13,10 @@ class MoneyTest extends FunSpec with ShouldMatchers {
       Coin(NON_ROUND, size=24.26, weight=5.67).valid should be(false)      
     }
     
+    it("rejects a big quarter") {
+      Coin(ROUND, size=24.27, weight=5.67).valid should be(false)      
+    }
+    
   }
   
 }
