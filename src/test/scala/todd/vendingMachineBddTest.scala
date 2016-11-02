@@ -173,12 +173,21 @@ As a customer
 I want to be told when exact change is required
 So that I can determine if I can buy something with the money I have before inserting it
 
-When the machine is not able to make change with the money in the machine for any of the items that it sells, it will display EXACT CHANGE ONLY instead of INSERT COIN.
+When the machine is not able to make change with the money in the machine for any of the items that it sells, it will 
+display EXACT CHANGE ONLY instead of INSERT COIN.
      */
     
     // TODO: think about the cases where exact change is available for some items
     // what is the minimal amount of change required to make change?
+    // assume you can return any coins not needed for purchase.  Probably should test for this.
     
+    //   coke is $1.00.  Could have 3 quarters and 3 dimes, requiring one nickel change
+    //   chips are $0.50.  Could have one quarter and 3 dimes, requiring one nickel change
+    //   candy is $0.65.  Could have three quarters, requiring one dime or two nickels change
+    //                    Could have two quarters and two dimes, requiring one nickel change
+    //   if something cost $0.05 and have a quarter, need two dimes, four nickels, or one dime two nickels.
+    
+    // Assumption:  we need either two dimes, four nickels, or one dime two nickels to make change.
   }
       
 
