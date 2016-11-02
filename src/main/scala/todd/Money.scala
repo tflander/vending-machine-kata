@@ -28,6 +28,8 @@ case object NON_ROUND extends CoinShape
 
 case class Coin(shape: CoinShape, size: Double, weight: Double) {
   val valid = if(shape == NON_ROUND) false else {
-    if(size == 24.26) true else false
+    if(size != 24.26) false else {
+      weight == 5.67
+    }
   }
 }
