@@ -63,6 +63,14 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insert(dime)
       coinSlot.insert(nickel)
       coinSlot.insertedAmount should be(40)
+      coinSlot.rejectedCoins.isEmpty should be (true)      
+    }
+    
+    it("rejects invalid coins") {
+      val coinSlot = new CoinSlot()
+      coinSlot.insert(penny)
+      coinSlot.insertedAmount should be(0)
+      coinSlot.rejectedCoins should be (Seq(penny))      
     }
   }
 }

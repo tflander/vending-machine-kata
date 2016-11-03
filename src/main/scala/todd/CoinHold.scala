@@ -33,10 +33,13 @@ class CoinHold {
 
 class CoinSlot {
  val coinHold = new CoinHold()
+ val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  
  def insert(coin: Coin) = {
     val coinWithValue = validate(coin)
-    if (coinWithValue != None) {
+    if (coinWithValue == None) {
+      rejectedCoins += coin
+    } else {
       coinHold.addCoin(coin)
     }
  }
