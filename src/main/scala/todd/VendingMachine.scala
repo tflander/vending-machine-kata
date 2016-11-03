@@ -3,6 +3,7 @@ package todd
 class VendingMachine {
   var display = "INSERT COIN"
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
+  val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
   var insertedAmount = 0
   
   def insertCoin(coin: Coin) = {
@@ -12,5 +13,9 @@ class VendingMachine {
     } else {
       coinReturn += coin
     }
+  }
+  
+  def selectProduct(product: Product) = {
+    dispensedProducts += product
   }
 }
