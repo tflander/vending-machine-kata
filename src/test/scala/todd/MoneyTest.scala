@@ -87,10 +87,8 @@ class MoneyTest extends FunSpec with ShouldMatchers {
   }
   
   describe("coin attribute tests") {
-    val quarter = Coin(ROUND, size=24.26, weight=5.67)
-    val dime = Coin(ROUND, size=17.91, weight=2.27)
-    val nickel = Coin(ROUND, size=21.21, weight=5.00)
-    val penny = Coin(ROUND, size=19.05, weight=2.50)
+    
+    import Money._
     
     it("validates quarter attributes") {
       quarter.name should be ("Quarter")

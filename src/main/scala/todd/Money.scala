@@ -39,6 +39,10 @@ case object Nickel extends CoinWithValue {
 
 object Money {
   val validCoins = Set(Quarter, Dime, Nickel)
+  val quarter = Quarter.coin
+  val dime = Dime.coin
+  val nickel = Nickel.coin
+  val penny = Coin(ROUND, size=19.05, weight=2.50)
   
   def validate(coin: Coin): Option[CoinWithValue] = {
     for (validCoin <- Money.validCoins) {
