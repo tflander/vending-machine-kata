@@ -63,13 +63,18 @@ something of that nature.
       vendingMachine.coinReturn should be(Seq(invalidCoin))
     }
     
-//    it("rejects an object of unknown size (given no  coins inserted), then continues to display INSERT COIN") {
-//      
-//    }
-//    
-//    it("accepts multiple valid coins and updates the display accordingly") {
-//      
-//    }
+    it("accepts multiple valid coins and updates the display accordingly") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(dime)    
+      vendingMachine.insertCoin(dime)    
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.insertCoin(penny)    
+      vendingMachine.display should be("0.60")
+      vendingMachine.coinReturn should be (Seq(penny))            
+    }
     
   }
   
