@@ -7,6 +7,8 @@ class VendingMachine {
   var lastMessage: Option[String] = None
   var insertedAmount = 0
   
+  private def penniesAsMoney(pennies: Int) = "%01.2f".format(pennies/100.0)
+  
   def display: String = {
     if(lastMessage != None) {
       val msg = lastMessage.get
@@ -18,7 +20,7 @@ class VendingMachine {
       return "INSERT COIN" 
     }
     
-    return "%01.2f".format(insertedAmount/100.0)
+    return penniesAsMoney(insertedAmount)
   }
     
   def insertCoin(coin: Coin) = {
@@ -43,7 +45,7 @@ class VendingMachine {
     }
     
     if(insertedAmount < product.cost) {
-      lastMessage = Some("PRICE $" + "%01.2f".format(product.cost/100.0))
+      lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))
     } else {
       insertedAmount -= product.cost
       dispensedProducts += product
