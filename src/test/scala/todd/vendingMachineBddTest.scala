@@ -51,13 +51,17 @@ something of that nature.
     it("rejects a penny (given no  coins inserted), then continues to display INSERT COIN") {
       val vendingMachine = new VendingMachine()
       vendingMachine.insertCoin(penny)    
-      vendingMachine.display should be("INSERT COIN")      
+      vendingMachine.display should be("INSERT COIN")  
+      // TODO: verify coin return
     }
 
-//    it("rejects an object of unknown weight (given no  coins inserted), then continues to display INSERT COIN") {
-//      
-//    }
-//    
+    it("rejects an invalid object (given no  coins inserted), then continues to display INSERT COIN") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(Coin(NON_ROUND, size=19, weight=3))    
+      vendingMachine.display should be("INSERT COIN")      
+      // TODO: verify coin return
+    }
+    
 //    it("rejects an object of unknown size (given no  coins inserted), then continues to display INSERT COIN") {
 //      
 //    }

@@ -43,6 +43,12 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.insertCoin(penny)    
       vendingMachine.display should be("INSERT COIN")
     }
+
+    it("rejects an invalid coin") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(Coin(NON_ROUND, size=19, weight=3))    
+      vendingMachine.display should be("INSERT COIN")
+    }
     
   }
 }
