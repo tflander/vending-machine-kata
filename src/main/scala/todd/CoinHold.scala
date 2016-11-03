@@ -1,6 +1,8 @@
 package todd
 import Money._
 
+case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int)
+
 class CoinHold {
   
   // TODO: remove coins and re-implement VendingMachine
@@ -45,4 +47,26 @@ class CoinSlot {
  }
  
  def insertedAmount = coinHold.totalAmount
+ 
+ def purchaseProductCosting(cost: Int): CoinCounts = {
+   val coinsUsedToPurchase = CoinCounts(0,0,0)
+   var remaining = cost
+   while (remaining >= quarter.value) {
+     remaining -= quarter.value
+     coinsUsedToPurchase.quarters += 1
+     coinHold.quarters -= 1
+   }
+   while (remaining >= dime.value) {
+     remaining -= dime.value
+     coinsUsedToPurchase.dimes += 1
+     coinHold.dimes -= 1
+   }
+   while (remaining >= nickel.value) {
+     remaining -= nickel.value
+     coinsUsedToPurchase.nickels += 1
+     coinHold.nickels -= 1
+   }
+   
+   return coinsUsedToPurchase
+ }
 }
