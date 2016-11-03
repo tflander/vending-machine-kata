@@ -10,6 +10,7 @@ sealed trait ValidCoin {
   def weight: Double
   def value: Int
   def name: String
+  def coin = Coin(shape, size, weight)
 }
 
 case object Quarter extends ValidCoin {
@@ -17,7 +18,7 @@ case object Quarter extends ValidCoin {
   val size = 24.26
   val weight = 5.67
   val value = 25
-  val name = "Quarter"  
+  val name = "Quarter"
 }
 
 case object Dime extends ValidCoin {

@@ -179,9 +179,16 @@ When a product is selected that costs less than the amount of money in the machi
 in the coin return.
      */
 
-//    it("returns one quarter and one dime given $1.00 inserted and candy purchased, and the machine has adequate change") {
-//      
-//    }
+    it("returns one dime given $0.75 inserted and candy purchased, and the machine has adequate change") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.display should be("0.75")
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.dispensedProducts should be(Seq(Candy))
+      vendingMachine.coinReturn should be (Seq(dime))      
+    }
   }
 
   describe("Return Coins") {

@@ -30,12 +30,27 @@ class VendingMachine {
   }
   
   def selectProduct(product: Product) = {
+    
+    def dispenseChange() = {
+      for(coin <- Money.validCoins) {
+        while(insertedAmount >= coin.value) {
+          println(coin.name)
+          println(insertedAmount)
+          insertedAmount -= coin.value
+          coinReturn += coin.coin
+        }
+      }
+    }
+    
     if(insertedAmount < product.cost) {
       lastMessage = Some("PRICE $" + "%01.2f".format(product.cost/100.0))
     } else {
       insertedAmount -= product.cost
       dispensedProducts += product
       lastMessage = Some("THANK YOU")
+      if(insertedAmount > 0) {
+        dispenseChange()
+      }
     }
   }
 }
