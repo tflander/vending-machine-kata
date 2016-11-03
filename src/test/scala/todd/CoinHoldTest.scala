@@ -80,6 +80,7 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insert(nickel)
       coinSlot.insertedAmount should be(40)
       coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=1, dimes=1, nickels=1))    
+      coinSlot.changeAmount should be(0)
       coinSlot.insertedAmount should be(0)
     }
     
@@ -92,6 +93,7 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insert(nickel)
       coinSlot.insertedAmount should be(40)
       coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=0, dimes=3, nickels=2))    
+      coinSlot.changeAmount should be(0)
       coinSlot.insertedAmount should be(0)
     }
     
@@ -103,8 +105,19 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insert(nickel)
       coinSlot.insertedAmount should be(35)
       coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=0, dimes=0, nickels=0))    
+      coinSlot.changeAmount should be(0)
       coinSlot.insertedAmount should be(35)
     }
     
+    it("calculates change required to return to the customer") {
+      val coinSlot = new CoinSlot()
+      coinSlot.insert(quarter)
+      coinSlot.insert(dime)
+      coinSlot.insert(dime)
+      coinSlot.insertedAmount should be(45)
+      coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=1, dimes=2, nickels=0))
+      coinSlot.changeAmount should be(5)
+      coinSlot.insertedAmount should be(0)      
+    }
   }
 }

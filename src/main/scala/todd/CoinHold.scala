@@ -35,6 +35,7 @@ class CoinHold {
 class CoinSlot {
  val coinHold = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
+ var changeAmount = 0
  
  def insert(coin: Coin) = {
     val coinWithValue = validate(coin)
@@ -53,22 +54,23 @@ class CoinSlot {
      return coinsUsedToPurchase
    }
    var remaining = cost
-   while (remaining >= quarter.value && coinHold.coinCollection.quarters > 0) {
+   while (coinHold.coinCollection.quarters > 0) {
      remaining -= quarter.value
      coinsUsedToPurchase.quarters += 1
      coinHold.coinCollection.quarters -= 1
    }
-   while (remaining >= dime.value && coinHold.coinCollection.dimes > 0) {
+   while (coinHold.coinCollection.dimes > 0) {
      remaining -= dime.value
      coinsUsedToPurchase.dimes += 1
      coinHold.coinCollection.dimes -= 1
    }
-   while (remaining >= nickel.value && coinHold.coinCollection.nickels > 0) {
+   while (coinHold.coinCollection.nickels > 0) {
      remaining -= nickel.value
      coinsUsedToPurchase.nickels += 1
      coinHold.coinCollection.nickels -= 1
    }
    
+   changeAmount = remaining * -1
    return coinsUsedToPurchase
  }
 }
