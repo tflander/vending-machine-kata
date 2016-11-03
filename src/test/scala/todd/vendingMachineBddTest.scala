@@ -52,14 +52,15 @@ something of that nature.
       val vendingMachine = new VendingMachine()
       vendingMachine.insertCoin(penny)    
       vendingMachine.display should be("INSERT COIN")  
-      // TODO: verify coin return
+      vendingMachine.coinReturn should be(Seq(penny))
     }
 
     it("rejects an invalid object (given no  coins inserted), then continues to display INSERT COIN") {
       val vendingMachine = new VendingMachine()
-      vendingMachine.insertCoin(Coin(NON_ROUND, size=19, weight=3))    
+      val invalidCoin = Coin(NON_ROUND, size=19, weight=3)
+      vendingMachine.insertCoin(invalidCoin)    
       vendingMachine.display should be("INSERT COIN")      
-      // TODO: verify coin return
+      vendingMachine.coinReturn should be(Seq(invalidCoin))
     }
     
 //    it("rejects an object of unknown size (given no  coins inserted), then continues to display INSERT COIN") {
