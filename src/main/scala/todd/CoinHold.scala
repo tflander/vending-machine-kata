@@ -1,16 +1,16 @@
 package todd
+import Money._
 
 class CoinHold {
   
   // TODO: remove coins and re-implement VendingMachine
   val coins = new scala.collection.mutable.ListBuffer[Coin]()
 
-  import Money._
   var quarters = 0
   var dimes = 0
   var nickels = 0
   
-  def insert(coin: Coin) = {
+  def addCoin(coin: Coin) = {
     val coinWithValue = validate(coin)
     coinWithValue match {
       case Some(goodCoin) => {
@@ -20,11 +20,11 @@ class CoinHold {
           case nickel.value => nickels += 1
         }
       }
-      case None => {}
+      case None => { throw new IllegalArgumentException("The coin hold cannot accept invalid coins") }
     }
   }
   
-  def insertedAmount: Int = {
+  def totalAmount: Int = {
     quarters * quarter.value +
     dimes * dime.value +
     nickels * nickel.value
