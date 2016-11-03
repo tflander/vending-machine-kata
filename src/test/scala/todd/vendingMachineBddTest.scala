@@ -133,23 +133,40 @@ either INSERT COIN or the current amount as appropriate.
       val vendingMachine = new VendingMachine()
       vendingMachine.insertCoin(quarter)    
       vendingMachine.display should be("0.25")
-      vendingMachine.selectProduct(Chips)
+      vendingMachine.selectProduct(Cola)
       vendingMachine.dispensedProducts.isEmpty should be(true)
-      vendingMachine.display should be("PRICE $0.50")
+      vendingMachine.display should be("PRICE $1.00")
       vendingMachine.display should be("0.25")      
     }
     
-//    it("displays 'PRICE $0.50' given not enough money inserted and chips button pressed") {
-//      
-//    }
-//    
-//    it("displays 'PRICE $0.65' given not enough money inserted and candy button pressed") {
-//      
-//    }
-//    
-//    it("displays INSERT COIN given price check and no coins inserted") {
-//      
-//    }
+    it("displays 'PRICE $0.50' given not enough money inserted and chips button pressed") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.display should be("0.25")
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.display should be("PRICE $0.50")
+      vendingMachine.display should be("0.25")            
+    }
+    
+    it("displays 'PRICE $0.65' given not enough money inserted and candy button pressed") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.display should be("0.25")
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.display should be("PRICE $0.65")
+      vendingMachine.display should be("0.25")      
+    }
+    
+    it("displays INSERT COIN given price check and no coins inserted") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.display should be("INSERT COIN")
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.display should be("PRICE $0.50")
+      vendingMachine.display should be("INSERT COIN")            
+    }
   }
 
   describe("Make Change") {
