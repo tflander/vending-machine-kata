@@ -82,6 +82,8 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("1.00")
       vendingMachine.selectProduct(Cola)
       vendingMachine.dispensedProducts should be(Seq(Cola))
+      vendingMachine.display should be("THANK YOU")
+      vendingMachine.display should be("INSERT COIN")
     }
   }
 }
