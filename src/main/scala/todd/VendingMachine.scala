@@ -4,7 +4,7 @@ class VendingMachine {
   
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
-  val coinHold = new scala.collection.mutable.ListBuffer[Coin]()
+  val coinHold = new CoinHold
   var lastMessage: Option[String] = None
   var insertedAmount = 0  // TODO: derive from coinHold
   
@@ -27,7 +27,7 @@ class VendingMachine {
   def insertCoin(coin: Coin) = {
     if(coin.valid) {
       insertedAmount += coin.value
-      coinHold += coin
+      coinHold.coins += coin
     } else {
       coinReturn += coin
     }
@@ -53,13 +53,13 @@ class VendingMachine {
       if(insertedAmount > 0) {
         dispenseChange()
       }
-      coinHold.clear()
+      coinHold.coins.clear()
     }
   }
   
   def pressCoinReturn() = {
     insertedAmount = 0
-    coinReturn ++= coinHold
-    coinHold.clear()
+    coinReturn ++= coinHold.coins
+    coinHold.coins.clear()
   }
 }
