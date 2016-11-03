@@ -6,7 +6,14 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     quarters * quarter.value +
     dimes * dime.value +
     nickels * nickel.value
-  }  
+  }
+  
+  def clear() = {
+    quarters=0
+    dimes=0
+    nickels=0
+  }
+  
 }
 
 class CoinHold {
@@ -49,28 +56,14 @@ class CoinSlot {
  def insertedAmount = coinHold.coinCollection.totalAmount
  
  def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
-   val coinsUsedToPurchase = CoinCounts(0,0,0)
-   if (cost > coinHold.coinCollection.totalAmount) {
-     return coinsUsedToPurchase
-   }
-   var remaining = cost
-   while (coinHold.coinCollection.quarters > 0) {
-     remaining -= quarter.value
-     coinsUsedToPurchase.quarters += 1
-     coinHold.coinCollection.quarters -= 1
-   }
-   while (coinHold.coinCollection.dimes > 0) {
-     remaining -= dime.value
-     coinsUsedToPurchase.dimes += 1
-     coinHold.coinCollection.dimes -= 1
-   }
-   while (coinHold.coinCollection.nickels > 0) {
-     remaining -= nickel.value
-     coinsUsedToPurchase.nickels += 1
-     coinHold.coinCollection.nickels -= 1
+   val coins = coinHold.coinCollection 
+   if (cost > coins.totalAmount) {
+     return CoinCounts(0,0,0)
    }
    
-   changeAmount = remaining * -1
-   return coinsUsedToPurchase
+   changeAmount = coins.totalAmount - cost
+   val coinsReleased = CoinCounts(coins.quarters, coins.dimes, coins.nickels)
+   coinHold.coinCollection.clear()
+   return coinsReleased
  }
 }
