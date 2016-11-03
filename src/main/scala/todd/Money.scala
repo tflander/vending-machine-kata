@@ -53,4 +53,6 @@ object Money {
 case class Coin(shape: CoinShape, size: Double, weight: Double) {
   val coin = Money.validate(this)
   val valid = coin != None
+  val value = if(valid) coin.get.value else 0
+  val name = if(valid) coin.get.name else "Invalid"
 }

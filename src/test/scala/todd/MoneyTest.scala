@@ -84,5 +84,37 @@ class MoneyTest extends FunSpec with ShouldMatchers {
       Coin(ROUND, size=21.21, weight=4.99).valid should be(false)
     }
     
-  }  
+  }
+  
+  describe("coin attribute tests") {
+    val quarter = Coin(ROUND, size=24.26, weight=5.67)
+    val dime = Coin(ROUND, size=17.91, weight=2.27)
+    val nickel = Coin(ROUND, size=21.21, weight=5.00)
+    val penny = Coin(ROUND, size=19.05, weight=2.50)
+    
+    it("validates quarter attributes") {
+      quarter.name should be ("Quarter")
+      quarter.valid should be(true)
+      quarter.value should be(25)
+    }
+    
+    it("validates dime attributes") {
+      dime.name should be ("Dime")
+      dime.valid should be(true)
+      dime.value should be(10)
+    }
+
+    it("validates nickel attributes") {
+      nickel.name should be ("Nickel")
+      nickel.valid should be(true)
+      nickel.value should be(5)
+    }
+
+    it("validates penny attributes") {
+      penny.name should be ("Invalid")
+      penny.valid should be(false)
+      penny.value should be(0)
+    }
+    
+  }
 }
