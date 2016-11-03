@@ -32,5 +32,10 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("0.10")
     }
     
+    it("accepts a nickel") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.display should be("0.05")
+    }
   }
 }
