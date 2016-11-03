@@ -4,7 +4,7 @@ sealed trait CoinShape {}
 case object ROUND extends CoinShape
 case object NON_ROUND extends CoinShape
 
-sealed trait ValidCoin {
+sealed trait CoinWithValue {
   def shape: CoinShape
   def size: Double
   def weight: Double
@@ -13,7 +13,7 @@ sealed trait ValidCoin {
   def coin = Coin(shape, size, weight)
 }
 
-case object Quarter extends ValidCoin {
+case object Quarter extends CoinWithValue {
   val shape = ROUND
   val size = 24.26
   val weight = 5.67
@@ -21,7 +21,7 @@ case object Quarter extends ValidCoin {
   val name = "Quarter"
 }
 
-case object Dime extends ValidCoin {
+case object Dime extends CoinWithValue {
   val shape = ROUND
   val size = 17.91
   val weight = 2.27
@@ -29,7 +29,7 @@ case object Dime extends ValidCoin {
   val name = "Dime"  
 }
 
-case object Nickel extends ValidCoin {
+case object Nickel extends CoinWithValue {
   val shape = ROUND
   val size = 21.21
   val weight = 5.00
@@ -40,7 +40,7 @@ case object Nickel extends ValidCoin {
 object Money {
   val validCoins = Set(Quarter, Dime, Nickel)
   
-  def validate(coin: Coin): Option[ValidCoin] = {
+  def validate(coin: Coin): Option[CoinWithValue] = {
     for (validCoin <- Money.validCoins) {
       if(coin.shape == validCoin.shape && coin.size == validCoin.size && coin.weight == validCoin.weight) {
         return Some(validCoin)
