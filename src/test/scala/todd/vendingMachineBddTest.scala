@@ -26,36 +26,37 @@ something of that nature.
      */
     
     it("displays INSERT COIN when no coins are inserted") {
-      
+      val vendingMachine = new VendingMachine()
+      vendingMachine.display should be("INSERT COIN")
     }
     
-    it("accepts a quarter (given no  coins inserted), then displays 0.25") {
-      
-    }
-    
-    it("accepts a dime (given no  coins inserted), then displays 0.10") {
-      
-    }
-    
-    it("accepts a nickle (given no  coins inserted), then displays 0.05") {
-      
-    }
-    
-    it("rejects a penny (given no  coins inserted), then continues to display INSERT COIN") {
-      
-    }
-
-    it("rejects an object of unknown weight (given no  coins inserted), then continues to display INSERT COIN") {
-      
-    }
-    
-    it("rejects an object of unknown size (given no  coins inserted), then continues to display INSERT COIN") {
-      
-    }
-    
-    it("accepts multiple valid coins and updates the display accordingly") {
-      
-    }
+//    it("accepts a quarter (given no  coins inserted), then displays 0.25") {
+//      
+//    }
+//    
+//    it("accepts a dime (given no  coins inserted), then displays 0.10") {
+//      
+//    }
+//    
+//    it("accepts a nickel (given no  coins inserted), then displays 0.05") {
+//      
+//    }
+//    
+//    it("rejects a penny (given no  coins inserted), then continues to display INSERT COIN") {
+//      
+//    }
+//
+//    it("rejects an object of unknown weight (given no  coins inserted), then continues to display INSERT COIN") {
+//      
+//    }
+//    
+//    it("rejects an object of unknown size (given no  coins inserted), then continues to display INSERT COIN") {
+//      
+//    }
+//    
+//    it("accepts multiple valid coins and updates the display accordingly") {
+//      
+//    }
     
   }
   
@@ -73,37 +74,37 @@ either INSERT COIN or the current amount as appropriate.
 
      */
     
-    it("dispenses cola given $1.00 entered and cola button is pressed, then displays THANK YOU until the display is checked") {
-      
-    }
-    
-    it("dispenses chips given $0.50 entered and chips button is pressed, then displays THANK YOU until the display is checked") {
-      
-    }
-    
-    it("dispenses candy given $0.65 entered and chips button is pressed, then displays THANK YOU until the display is checked") {
-      
-    }
-    
-    it("displays 'PRICE $1.00' given not enough money inserted and cola button pressed") {
-      
-    }
-    
-    it("displays 'PRICE $0.50' given not enough money inserted and chips button pressed") {
-      
-    }
-    
-    it("displays 'PRICE $0.65' given not enough money inserted and candy button pressed") {
-      
-    }
-    
-    it("displays INSERT COIN given price check and no coins inserted") {
-      
-    }
-    
-    it("displays $0.15 given price check and one nickle and one dime inserted") {
-      
-    }
+//    it("dispenses cola given $1.00 entered and cola button is pressed, then displays THANK YOU until the display is checked") {
+//      
+//    }
+//    
+//    it("dispenses chips given $0.50 entered and chips button is pressed, then displays THANK YOU until the display is checked") {
+//      
+//    }
+//    
+//    it("dispenses candy given $0.65 entered and chips button is pressed, then displays THANK YOU until the display is checked") {
+//      
+//    }
+//    
+//    it("displays 'PRICE $1.00' given not enough money inserted and cola button pressed") {
+//      
+//    }
+//    
+//    it("displays 'PRICE $0.50' given not enough money inserted and chips button pressed") {
+//      
+//    }
+//    
+//    it("displays 'PRICE $0.65' given not enough money inserted and candy button pressed") {
+//      
+//    }
+//    
+//    it("displays INSERT COIN given price check and no coins inserted") {
+//      
+//    }
+//    
+//    it("displays $0.15 given price check and one nickle and one dime inserted") {
+//      
+//    }
   }
 
   describe("Make Change") {
@@ -116,9 +117,9 @@ When a product is selected that costs less than the amount of money in the machi
 in the coin return.
      */
 
-    it("returns one quarter and one dime given $1.00 inserted and candy purchased, and the machine has adequate change") {
-      
-    }
+//    it("returns one quarter and one dime given $1.00 inserted and candy purchased, and the machine has adequate change") {
+//      
+//    }
   }
 
   describe("Return Coins") {
@@ -130,13 +131,13 @@ So that I can change my mind about buying stuff from the vending machine
 When the return coins button is pressed, the money the customer has placed in the machine is returned and the display shows INSERT COIN.
      */
     
-    it("returns coins, given one nickle and one dime inserted, and the 'return coins' button is pressed, then displays INSERT COIN") {
-      
-    }
-    
-    it("does not return coins when no coins inserted and the 'return coins' button is pressed") {
-      
-    }
+//    it("returns coins, given one nickle and one dime inserted, and the 'return coins' button is pressed, then displays INSERT COIN") {
+//      
+//    }
+//    
+//    it("does not return coins when no coins inserted and the 'return coins' button is pressed") {
+//      
+//    }
   }
   
   describe("Sold Out") {
@@ -150,25 +151,25 @@ When the item selected by the customer is out of stock, the machine displays SOL
 
      */
     
-    it("displays SOLD OUT given coke is sold out, $1.00 inserted and coke button is pressed, then displays $1.00") {
-      
-    }
-
-    it("displays SOLD OUT given coke is sold out, $0.50 inserted and coke button is pressed, then displays $0.50") {
-      
-    }
-    
-    it("displays SOLD OUT given coke is sold out, no money inserted and coke button is pressed, then displays INSERT COIN") {
-      
-    }
-    
-    it("displays SOLD OUT given chips are sold out, $1.00 inserted and chips button is pressed, then displays $1.00") {
-      
-    }
-    
-    it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
-      
-    }
+//    it("displays SOLD OUT given coke is sold out, $1.00 inserted and coke button is pressed, then displays $1.00") {
+//      
+//    }
+//
+//    it("displays SOLD OUT given coke is sold out, $0.50 inserted and coke button is pressed, then displays $0.50") {
+//      
+//    }
+//    
+//    it("displays SOLD OUT given coke is sold out, no money inserted and coke button is pressed, then displays INSERT COIN") {
+//      
+//    }
+//    
+//    it("displays SOLD OUT given chips are sold out, $1.00 inserted and chips button is pressed, then displays $1.00") {
+//      
+//    }
+//    
+//    it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
+//      
+//    }
     
   }
   
