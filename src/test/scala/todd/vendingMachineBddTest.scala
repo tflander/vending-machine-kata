@@ -116,10 +116,19 @@ either INSERT COIN or the current amount as appropriate.
       vendingMachine.display should be("INSERT COIN")
     }
     
-//    it("dispenses candy given $0.65 entered and candy button is pressed, then displays THANK YOU until the display is checked") {
-//      
-//    }
-//    
+    it("dispenses candy given $0.65 entered and candy button is pressed, then displays THANK YOU until the display is checked") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(dime)    
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.display should be("0.65")
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.dispensedProducts should be(Seq(Candy))
+      vendingMachine.display should be("THANK YOU")
+      vendingMachine.display should be("INSERT COIN")      
+    }
+    
 //    it("displays 'PRICE $1.00' given not enough money inserted and cola button pressed") {
 //      
 //    }
