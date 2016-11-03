@@ -48,7 +48,7 @@ class CoinSlot {
  
  def insertedAmount = coinHold.totalAmount
  
- def purchaseProductCosting(cost: Int): CoinCounts = {
+ def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
    val coinsUsedToPurchase = CoinCounts(0,0,0)
    var remaining = cost
    while (remaining >= quarter.value) {

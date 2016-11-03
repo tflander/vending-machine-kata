@@ -79,7 +79,7 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insert(dime)
       coinSlot.insert(nickel)
       coinSlot.insertedAmount should be(40)
-      coinSlot.purchaseProductCosting(40) should be(CoinCounts(quarters=1, dimes=1, nickels=1))    
+      coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=1, dimes=1, nickels=1))    
       coinSlot.insertedAmount should be(0)
     }
     
