@@ -34,5 +34,19 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinHold.dimes should be(1)
     }
     
+    it("accepts multiple coins") {
+      val coinHold = new CoinHold()
+      coinHold.insert(quarter)
+      coinHold.insert(dime)
+      coinHold.insert(dime)
+      coinHold.insert(nickel)
+      coinHold.insert(nickel)
+      coinHold.insert(nickel)
+      coinHold.insertedAmount should be(60)
+      coinHold.quarters should be(1)
+      coinHold.dimes should be(2)      
+      coinHold.nickels should be(3)
+    }
+    
   }
 }
