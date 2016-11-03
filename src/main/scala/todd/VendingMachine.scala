@@ -36,8 +36,6 @@ class VendingMachine {
     def dispenseChange() = {
       for(coin <- Money.validCoins) {
         while(insertedAmount >= coin.value) {
-          println(coin.name)
-          println(insertedAmount)
           insertedAmount -= coin.value
           coinReturn += coin.coin
         }
