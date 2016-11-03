@@ -48,10 +48,12 @@ something of that nature.
       vendingMachine.display should be("0.05")      
     }
     
-//    it("rejects a penny (given no  coins inserted), then continues to display INSERT COIN") {
-//      
-//    }
-//
+    it("rejects a penny (given no  coins inserted), then continues to display INSERT COIN") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(penny)    
+      vendingMachine.display should be("INSERT COIN")      
+    }
+
 //    it("rejects an object of unknown weight (given no  coins inserted), then continues to display INSERT COIN") {
 //      
 //    }
