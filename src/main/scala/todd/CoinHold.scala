@@ -50,17 +50,17 @@ class CoinSlot {
  def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
    val coinsUsedToPurchase = CoinCounts(0,0,0)
    var remaining = cost
-   while (remaining >= quarter.value) {
+   while (remaining >= quarter.value && coinHold.coinCollection.quarters > 0) {
      remaining -= quarter.value
      coinsUsedToPurchase.quarters += 1
      coinHold.coinCollection.quarters -= 1
    }
-   while (remaining >= dime.value) {
+   while (remaining >= dime.value && coinHold.coinCollection.dimes > 0) {
      remaining -= dime.value
      coinsUsedToPurchase.dimes += 1
      coinHold.coinCollection.dimes -= 1
    }
-   while (remaining >= nickel.value) {
+   while (remaining >= nickel.value && coinHold.coinCollection.nickels > 0) {
      remaining -= nickel.value
      coinsUsedToPurchase.nickels += 1
      coinHold.coinCollection.nickels -= 1

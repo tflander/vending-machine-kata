@@ -83,6 +83,16 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.insertedAmount should be(0)
     }
     
-    // TODO: don't purchase with coins you don't have
+    it("releases coins to purchase a product using available coins") {
+      val coinSlot = new CoinSlot()
+      coinSlot.insert(dime)
+      coinSlot.insert(dime)
+      coinSlot.insert(dime)
+      coinSlot.insert(nickel)
+      coinSlot.insert(nickel)
+      coinSlot.insertedAmount should be(40)
+      coinSlot.releaseCoinsForProductCosting(40) should be(CoinCounts(quarters=0, dimes=3, nickels=2))    
+      coinSlot.insertedAmount should be(0)
+    }
   }
 }
