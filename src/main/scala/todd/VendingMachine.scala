@@ -30,8 +30,12 @@ class VendingMachine {
   }
   
   def selectProduct(product: Product) = {
-    insertedAmount -= product.cost
-    dispensedProducts += product
-    lastMessage = Some("THANK YOU")
+    if(insertedAmount < product.cost) {
+      lastMessage = Some("PRICE $" + "%01.2f".format(product.cost/100.0))
+    } else {
+      insertedAmount -= product.cost
+      dispensedProducts += product
+      lastMessage = Some("THANK YOU")
+    }
   }
 }

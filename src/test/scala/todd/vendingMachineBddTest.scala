@@ -129,10 +129,16 @@ either INSERT COIN or the current amount as appropriate.
       vendingMachine.display should be("INSERT COIN")      
     }
     
-//    it("displays 'PRICE $1.00' given not enough money inserted and cola button pressed") {
-//      
-//    }
-//    
+    it("displays 'PRICE $1.00' given not enough money inserted and cola button pressed") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.display should be("0.25")
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.display should be("PRICE $0.50")
+      vendingMachine.display should be("0.25")      
+    }
+    
 //    it("displays 'PRICE $0.50' given not enough money inserted and chips button pressed") {
 //      
 //    }
@@ -142,10 +148,6 @@ either INSERT COIN or the current amount as appropriate.
 //    }
 //    
 //    it("displays INSERT COIN given price check and no coins inserted") {
-//      
-//    }
-//    
-//    it("displays $0.15 given price check and one nickle and one dime inserted") {
 //      
 //    }
   }

@@ -109,6 +109,18 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("THANK YOU")
       vendingMachine.display should be("INSERT COIN")
     }
+  }
+  
+  describe("display price tests") {
     
+    it("displays price when not enough money entered") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.display should be("0.25")
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.display should be("PRICE $0.50")
+      vendingMachine.display should be("0.25")
+    }
   }
 }
