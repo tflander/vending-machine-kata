@@ -200,13 +200,23 @@ So that I can change my mind about buying stuff from the vending machine
 When the return coins button is pressed, the money the customer has placed in the machine is returned and the display shows INSERT COIN.
      */
     
-//    it("returns coins, given one nickle and one dime inserted, and the 'return coins' button is pressed, then displays INSERT COIN") {
-//      
-//    }
-//    
-//    it("does not return coins when no coins inserted and the 'return coins' button is pressed") {
-//      
-//    }
+    it("returns coins, given one nickel and one dime inserted, and the 'return coins' button is pressed, then displays INSERT COIN") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(nickel)    
+      vendingMachine.insertCoin(dime)    
+      vendingMachine.display should be("0.15")
+      vendingMachine.pressCoinReturn()
+      vendingMachine.coinReturn should be (Seq(nickel, dime))
+      vendingMachine.display should be("INSERT COIN")      
+    }
+    
+    it("does not return coins when no coins inserted and the 'return coins' button is pressed") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.display should be("INSERT COIN")
+      vendingMachine.pressCoinReturn()
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.display should be("INSERT COIN")            
+    }
   }
   
   describe("Sold Out") {
