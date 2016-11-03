@@ -36,10 +36,12 @@ something of that nature.
       vendingMachine.display should be("0.25")      
     }
     
-//    it("accepts a dime (given no  coins inserted), then displays 0.10") {
-//      
-//    }
-//    
+    it("accepts a dime (given no  coins inserted), then displays 0.10") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.insertCoin(dime)    
+      vendingMachine.display should be("0.10")      
+    }
+    
 //    it("accepts a nickel (given no  coins inserted), then displays 0.05") {
 //      
 //    }
