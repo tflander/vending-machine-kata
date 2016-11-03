@@ -30,3 +30,16 @@ class CoinHold {
     nickels * nickel.value
   }
 }
+
+class CoinSlot {
+ val coinHold = new CoinHold()
+ 
+ def insert(coin: Coin) = {
+    val coinWithValue = validate(coin)
+    if (coinWithValue != None) {
+      coinHold.addCoin(coin)
+    }
+ }
+ 
+ def insertedAmount = coinHold.totalAmount
+}

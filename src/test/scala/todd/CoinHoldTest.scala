@@ -5,7 +5,7 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
 
   import Money._
     
-  describe("add coins") {
+  describe("generic coin hold tests") {
     
     it("accepts quarters") {
       val coinHold = new CoinHold()
@@ -54,6 +54,15 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
         coinHold.addCoin(penny)
       }
     }
-    
+  }
+  
+  describe("coin slot coin hold tests") {
+    it("accepts valid coins that are inserted") {
+      val coinSlot = new CoinSlot()
+      coinSlot.insert(quarter)
+      coinSlot.insert(dime)
+      coinSlot.insert(nickel)
+      coinSlot.insertedAmount should be(40)
+    }
   }
 }
