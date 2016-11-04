@@ -16,11 +16,11 @@ class VendingMachine {
       return msg
     }
     
-    if(coinSlot.coinHold.coinCollection.totalAmount == 0) {
+    if(coinSlot.insertedAmount == 0) {
       return "INSERT COIN" 
     }
     
-    return penniesAsMoney(coinSlot.coinHold.coinCollection.totalAmount)
+    return penniesAsMoney(coinSlot.insertedAmount)
   }
     
   def insertCoin(coin: Coin) = {
@@ -51,6 +51,5 @@ class VendingMachine {
   
   def pressCoinReturn() = {
     coinReturn ++= coinSlot.returnCoins()
-    coinSlot.coinHold.coinCollection.clear()
   }
 }

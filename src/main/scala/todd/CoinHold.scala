@@ -51,7 +51,7 @@ class CoinHold {
 }
 
 class CoinSlot {
- val coinHold = new CoinHold()
+ private val coinHold = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var changeAmount = 0
  
