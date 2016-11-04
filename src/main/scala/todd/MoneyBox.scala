@@ -2,7 +2,7 @@ package todd
 import Money._
 
 class MoneyBox {
- private val coinHold = new CoinHold()
+ private val customerCoins = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var changeAmount = 0
  var coinVault = CoinCounts(0,0,0)
@@ -12,29 +12,29 @@ class MoneyBox {
     if (coinWithValue == None) {
       rejectedCoins += coin
     } else {
-      coinHold.addCoin(coin)
+      customerCoins.addCoin(coin)
     }
  }
  
- def insertedAmount = coinHold.coinCollection.totalAmount
+ def insertedAmount = customerCoins.coinCollection.totalAmount
  
  def vaultAmount = coinVault.totalAmount
  
  def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
-   val coins = coinHold.coinCollection 
+   val coins = customerCoins.coinCollection 
    if (cost > coins.totalAmount) {
      return CoinCounts(0,0,0)
    }
    
    changeAmount = coins.totalAmount - cost
    val coinsReleased = CoinCounts(coins.quarters, coins.dimes, coins.nickels)
-   coinHold.coinCollection.clear()
+   customerCoins.coinCollection.clear()
    return coinsReleased
  }
  
  def returnCoins(): Seq[Coin] = {
-   val coinsToReturn = coinHold.coinCollection.toCoins
-   coinHold.coinCollection.clear()
+   val coinsToReturn = customerCoins.coinCollection.toCoins
+   customerCoins.coinCollection.clear()
    return coinsToReturn
  }
  
