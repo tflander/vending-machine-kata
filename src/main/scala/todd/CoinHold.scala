@@ -14,6 +14,20 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     nickels=0
   }
   
+  def toCoins: Seq[Coin] = {
+    val coins = new scala.collection.mutable.ListBuffer[Coin]
+    for(i <- 1 to quarters) {
+      coins += quarter
+    }
+    for(i <- 1 to dimes) {
+      coins += dime
+    }
+    for(i <- 1 to nickels) {
+      coins += nickel
+    }
+    return coins
+  }
+  
 }
 
 class CoinHold {

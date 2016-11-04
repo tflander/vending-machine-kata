@@ -5,6 +5,11 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
 
   import Money._
     
+  describe("coin count tests") {
+    val coinCounts = CoinCounts(quarters=1, dimes=2, nickels=3)
+    coinCounts.toCoins should be (Seq(quarter, dime, dime, nickel, nickel, nickel))
+  }
+  
   describe("generic coin hold tests") {
     
     it("accepts quarters") {
