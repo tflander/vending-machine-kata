@@ -50,22 +50,7 @@ class VendingMachine {
   }
   
   def pressCoinReturn() = {
-    // TODO: move to coin slot
-    import Money._
-    val a = coinSlot.coinHold.coinCollection
-    println(a)
-    for(i <- 1 to a.quarters) {
-      println("adding quarter")
-      coinReturn += quarter
-    }
-    for(i <- 1 to a.dimes) {
-      println("adding dime")
-      coinReturn += dime
-    }
-    for(i <- 1 to a.nickels) {
-      println("adding nickel")
-      coinReturn += nickel
-    }
+    coinReturn ++= coinSlot.coinHold.coinCollection.toCoins
     coinSlot.coinHold.coinCollection.clear()
   }
 }
