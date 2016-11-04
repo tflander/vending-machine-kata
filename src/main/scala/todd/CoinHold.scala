@@ -28,6 +28,12 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     return coins
   }
   
+  def +=(coins: CoinCounts) = {
+    quarters += coins.quarters
+    dimes += coins.dimes
+    nickels += coins.nickels
+  }
+  
 }
 
 class CoinHold {

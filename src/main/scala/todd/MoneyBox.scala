@@ -22,13 +22,8 @@ class MoneyBox {
  
  def releaseCoinsForProductCosting(cost: Int) = {
    require (cost <= insertedAmount)
-   
    changeAmount = insertedAmount - cost
-   
-   val coins = customerCoins.coinCollection 
-   coinVault.quarters += coins.quarters
-   coinVault.dimes += coins.dimes
-   coinVault.nickels += coins.nickels
+   coinVault +=  customerCoins.coinCollection
    customerCoins.coinCollection.clear()
  }
  
