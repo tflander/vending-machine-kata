@@ -43,5 +43,26 @@ class CoinSlot {
     coinVault.dimes += coins.dimes
     coinVault.nickels += coins.nickels
   }
+  
+  def releaseChange(amount: Int): Seq[Coin] = {
+    val change = new scala.collection.mutable.ListBuffer[Coin]()
+    var remainder = amount
+    while(coinVault.quarters > 0 && remainder >= quarter.value) {
+      change += quarter
+      remainder -= quarter.value
+      coinVault.quarters -= 1
+    }
+    while(coinVault.dimes > 0 && remainder >= dime.value) {
+      change += dime
+      remainder -= dime.value
+      coinVault.dimes -= 1
+    }
+    while(coinVault.nickels > 0 && remainder >= nickel.value) {
+      change += nickel
+      remainder -= nickel.value
+      coinVault.nickels -= 1
+    }
+    return change
+  }
  
 }
