@@ -84,5 +84,14 @@ class CoinSlotTest extends FunSpec with ShouldMatchers {
       coinSlot.changeAmount should be(0)
       coinSlot.insertedAmount should be(0)            
     }
-  }  
+  }
+  
+  describe("coin vault tests") {
+    it("get requested amount from the coin vault for making change") {
+      val coinSlot = new CoinSlot()
+      coinSlot.addCoinsToCoinVault(CoinCounts(quarters=0, dimes=2, nickels=2))
+      coinSlot.vaultAmount should be(30)
+      // TODO: finish test
+    }
+  }
 }

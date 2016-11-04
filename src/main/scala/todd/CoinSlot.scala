@@ -5,6 +5,7 @@ class CoinSlot {
  private val coinHold = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var changeAmount = 0
+ var coinVault = CoinCounts(0,0,0)
  
  def insert(coin: Coin) = {
     val coinWithValue = validate(coin)
@@ -16,6 +17,8 @@ class CoinSlot {
  }
  
  def insertedAmount = coinHold.coinCollection.totalAmount
+ 
+ def vaultAmount = 30 // TODO: don't cheat
  
  def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
    val coins = coinHold.coinCollection 
@@ -34,4 +37,11 @@ class CoinSlot {
    coinHold.coinCollection.clear()
    return coinsToReturn
  }
+ 
+  def addCoinsToCoinVault(coins: CoinCounts) = {
+    coinVault.quarters += coins.quarters
+    coinVault.dimes += coins.dimes
+    coinVault.nickels += coins.nickels
+  }
+ 
 }
