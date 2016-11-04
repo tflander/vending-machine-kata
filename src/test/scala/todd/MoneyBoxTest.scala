@@ -30,7 +30,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(dime)
       moneyBox.insert(nickel)
       moneyBox.insertedAmount should be(40)
-      moneyBox.releaseCoinsForProductCosting(40)
+      moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
       moneyBox.coinVault should be(CoinCounts(quarters=1, dimes=1, nickels=1))    
       moneyBox.changeAmount should be(0)
       moneyBox.insertedAmount should be(0)
@@ -44,7 +44,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(nickel)
       moneyBox.insert(nickel)
       moneyBox.insertedAmount should be(40)
-      moneyBox.releaseCoinsForProductCosting(40)
+      moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
       moneyBox.coinVault should be(CoinCounts(quarters=0, dimes=3, nickels=2))    
       moneyBox.changeAmount should be(0)
       moneyBox.insertedAmount should be(0)
@@ -53,7 +53,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
     it("releases coins to purchase a product only when funds are available") {
       val moneyBox = new MoneyBox()
       intercept[IllegalArgumentException] {
-        moneyBox.releaseCoinsForProductCosting(40)
+        moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
       }
     }
   }
@@ -66,7 +66,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(dime)
       moneyBox.insert(dime)
       moneyBox.insertedAmount should be(45)
-      moneyBox.releaseCoinsForProductCosting(40)
+      moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
       moneyBox.coinVault should be(CoinCounts(quarters=1, dimes=2, nickels=0))
       moneyBox.changeAmount should be(5)
       moneyBox.insertedAmount should be(0)      

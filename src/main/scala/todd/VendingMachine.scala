@@ -34,7 +34,7 @@ class VendingMachine {
     if(product.cost > moneyBox.insertedAmount) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
     } else {
-      moneyBox.releaseCoinsForProductCosting(product.cost)
+      moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)
       dispensedProducts += product
       lastMessage = Some("THANK YOU")
       coinReturn ++= moneyBox.releaseChange(moneyBox.changeAmount)

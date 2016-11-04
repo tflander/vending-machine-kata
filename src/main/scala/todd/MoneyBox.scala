@@ -20,11 +20,13 @@ class MoneyBox {
  
  def vaultAmount = coinVault.totalAmount
  
- def releaseCoinsForProductCosting(cost: Int) = {
+ def acceptCoinsAndReturnChangeForProductCosting(cost: Int): Int = {
    require (cost <= insertedAmount)
-   changeAmount = insertedAmount - cost
    coinVault +=  customerCoins.coinCollection
+   val change = insertedAmount - cost
    customerCoins.coinCollection.clear()
+   changeAmount = change
+   return change
  }
  
  def returnCoins(): Seq[Coin] = {
