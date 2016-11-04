@@ -34,6 +34,27 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     nickels += coins.nickels
   }
   
+  def removeAmountWithFewestCounts (amount: Int): Seq[Coin] = {
+    val change = new scala.collection.mutable.ListBuffer[Coin]()
+    var remainder = amount
+    while(quarters > 0 && remainder >= quarter.value) {
+      change += quarter
+      remainder -= quarter.value
+      quarters -= 1
+    }
+    while(dimes > 0 && remainder >= dime.value) {
+      change += dime
+      remainder -= dime.value
+      dimes -= 1
+    }
+    while(nickels > 0 && remainder >= nickel.value) {
+      change += nickel
+      remainder -= nickel.value
+      nickels -= 1
+    }
+    return change    
+  }
+  
 }
 
 class CoinHold {

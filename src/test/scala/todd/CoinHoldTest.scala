@@ -17,6 +17,13 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coins += CoinCounts(quarters=1, dimes=2, nickels=3) 
       coins should be(CoinCounts(quarters=2, dimes=4, nickels=6))
     }
+    
+    it("subtracts coin counts") {
+      val coins = CoinCounts(quarters=1, dimes=2, nickels=3) 
+      val coinsRemoved = coins.removeAmountWithFewestCounts(40) 
+      coins should be(CoinCounts(quarters=0, dimes=1, nickels=2))
+      coinsRemoved should be(Seq(quarter, dime, nickel))
+    }
   }
   
   describe("generic coin hold tests") {
