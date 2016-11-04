@@ -203,7 +203,7 @@ When the return coins button is pressed, the money the customer has placed in th
       vendingMachine.insertCoin(dime)    
       vendingMachine.display should be("0.15")
       vendingMachine.pressCoinReturn()
-      vendingMachine.coinReturn should be (Seq(nickel, dime))
+      vendingMachine.coinReturn.toSet should be (Set(nickel, dime))
       vendingMachine.display should be("INSERT COIN")      
     }
     
