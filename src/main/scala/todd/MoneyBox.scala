@@ -1,7 +1,7 @@
 package todd
 import Money._
 
-class CoinSlot {
+class MoneyBox {
  private val coinHold = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var changeAmount = 0

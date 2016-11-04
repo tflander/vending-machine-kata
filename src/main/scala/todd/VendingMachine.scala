@@ -4,7 +4,7 @@ class VendingMachine {
   
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
-  val coinSlot = new CoinSlot
+  val coinSlot = new MoneyBox
   var lastMessage: Option[String] = None
   
   private def penniesAsMoney(pennies: Int) = "%01.2f".format(pennies/100.0)
