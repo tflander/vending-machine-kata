@@ -4,7 +4,7 @@ class VendingMachine {
   
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
-  val coinSlot = new MoneyBox
+  val moneyBox = new MoneyBox
   var lastMessage: Option[String] = None
   
   private def penniesAsMoney(pennies: Int) = "%01.2f".format(pennies/100.0)
@@ -16,22 +16,22 @@ class VendingMachine {
       return msg
     }
     
-    if(coinSlot.insertedAmount == 0) {
+    if(moneyBox.insertedAmount == 0) {
       return "INSERT COIN" 
     }
     
-    return penniesAsMoney(coinSlot.insertedAmount)
+    return penniesAsMoney(moneyBox.insertedAmount)
   }
     
   def insertCoin(coin: Coin) = {
-    coinSlot.insert(coin)
+    moneyBox.insert(coin)
     coinReturn.clear()
-    coinReturn ++= coinSlot.rejectedCoins
+    coinReturn ++= moneyBox.rejectedCoins
   }
   
   def selectProduct(product: Product) = {
     
-    val releasedCoins = coinSlot.releaseCoinsForProductCosting(product.cost)
+    val releasedCoins = moneyBox.releaseCoinsForProductCosting(product.cost)
     if(releasedCoins.totalAmount == 0) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))
     } else {
@@ -40,8 +40,8 @@ class VendingMachine {
       
       // dispense change
       for(coin <- Money.validCoins) {
-        while(coinSlot.changeAmount >= coin.value) {
-          coinSlot.changeAmount -= coin.value
+        while(moneyBox.changeAmount >= coin.value) {
+          moneyBox.changeAmount -= coin.value
           coinReturn += coin.coin
         }
       }
@@ -50,6 +50,6 @@ class VendingMachine {
   }
   
   def pressCoinReturn() = {
-    coinReturn ++= coinSlot.returnCoins()
+    coinReturn ++= moneyBox.returnCoins()
   }
 }
