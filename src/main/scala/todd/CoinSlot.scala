@@ -18,7 +18,7 @@ class CoinSlot {
  
  def insertedAmount = coinHold.coinCollection.totalAmount
  
- def vaultAmount = 30 // TODO: don't cheat
+ def vaultAmount = coinVault.totalAmount
  
  def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
    val coins = coinHold.coinCollection 
