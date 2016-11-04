@@ -124,5 +124,16 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
       coinSlot.changeAmount should be(5)
       coinSlot.insertedAmount should be(0)      
     }
+    
+    it("returns coins") {
+      val coinSlot = new CoinSlot()
+      coinSlot.insert(quarter)
+      coinSlot.insert(dime)
+      coinSlot.insert(dime)
+      coinSlot.insertedAmount should be(45)
+      coinSlot.returnCoins should be(Seq(quarter, dime, dime))
+      coinSlot.changeAmount should be(0)
+      coinSlot.insertedAmount should be(0)            
+    }
   }
 }

@@ -77,4 +77,10 @@ class CoinSlot {
    coinHold.coinCollection.clear()
    return coinsReleased
  }
+ 
+ def returnCoins(): Seq[Coin] = {
+   val coinsToReturn = coinHold.coinCollection.toCoins
+   coinHold.coinCollection.clear()
+   return coinsToReturn
+ }
 }
