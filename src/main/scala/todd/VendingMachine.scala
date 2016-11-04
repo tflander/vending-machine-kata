@@ -34,11 +34,10 @@ class VendingMachine {
     if(product.cost > moneyBox.insertedAmount) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
     } else {
-      moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)
+      val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)
       dispensedProducts += product
       lastMessage = Some("THANK YOU")
-      coinReturn ++= moneyBox.releaseChange(moneyBox.changeAmount)
-      moneyBox.changeAmount = 0
+      coinReturn ++= moneyBox.releaseChange(change)
     }
     
   }

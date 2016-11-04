@@ -4,7 +4,6 @@ import Money._
 class MoneyBox {
  private val customerCoins = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
- var changeAmount = 0
  var coinVault = CoinCounts(0,0,0)
  
  def insert(coin: Coin) = {
@@ -25,7 +24,6 @@ class MoneyBox {
    coinVault +=  customerCoins.coinCollection
    val change = insertedAmount - cost
    customerCoins.coinCollection.clear()
-   changeAmount = change
    return change
  }
  
