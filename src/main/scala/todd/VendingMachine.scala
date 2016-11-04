@@ -37,14 +37,8 @@ class VendingMachine {
     } else {
       dispensedProducts += product
       lastMessage = Some("THANK YOU")
-      
-      // dispense change
-      for(coin <- Money.validCoins) {
-        while(moneyBox.changeAmount >= coin.value) {
-          moneyBox.changeAmount -= coin.value
-          coinReturn += coin.coin
-        }
-      }
+      coinReturn ++= moneyBox.releaseChange(moneyBox.changeAmount)
+      moneyBox.changeAmount = 0
     }
     
   }

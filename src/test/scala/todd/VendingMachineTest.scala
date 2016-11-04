@@ -124,6 +124,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
   describe("change tests") {
     it("gives change when necessary") {
       val vendingMachine = new VendingMachine()
+      vendingMachine.moneyBox.coinVault.dimes=1
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    

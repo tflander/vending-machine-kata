@@ -178,6 +178,7 @@ in the coin return.
 
     it("returns one dime given $0.75 inserted and candy purchased, and the machine has adequate change") {
       val vendingMachine = new VendingMachine()
+      vendingMachine.moneyBox.coinVault.dimes=1
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
