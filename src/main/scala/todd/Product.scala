@@ -3,7 +3,7 @@ package todd
 sealed trait Product {
   def name: String
   def cost: Int
-  val quantity = 0
+  var quantity = 0
 }
 
 case object Cola extends Product {
