@@ -50,7 +50,7 @@ class VendingMachine {
   }
   
   def pressCoinReturn() = {
-    coinReturn ++= coinSlot.coinHold.coinCollection.toCoins
+    coinReturn ++= coinSlot.returnCoins()
     coinSlot.coinHold.coinCollection.clear()
   }
 }
