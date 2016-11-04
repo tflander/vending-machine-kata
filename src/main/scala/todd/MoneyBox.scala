@@ -20,16 +20,16 @@ class MoneyBox {
  
  def vaultAmount = coinVault.totalAmount
  
- def releaseCoinsForProductCosting(cost: Int): CoinCounts = {
-   val coins = customerCoins.coinCollection 
-   if (cost > coins.totalAmount) {
-     return CoinCounts(0,0,0)
-   }
+ def releaseCoinsForProductCosting(cost: Int) = {
+   require (cost <= insertedAmount)
    
-   changeAmount = coins.totalAmount - cost
-   val coinsReleased = CoinCounts(coins.quarters, coins.dimes, coins.nickels)
+   changeAmount = insertedAmount - cost
+   
+   val coins = customerCoins.coinCollection 
+   coinVault.quarters += coins.quarters
+   coinVault.dimes += coins.dimes
+   coinVault.nickels += coins.nickels
    customerCoins.coinCollection.clear()
-   return coinsReleased
  }
  
  def returnCoins(): Seq[Coin] = {
