@@ -228,10 +228,10 @@ When the item selected by the customer is out of stock, the machine displays SOL
 
      */
     
-//    it("displays SOLD OUT given coke is sold out, $1.00 inserted and coke button is pressed, then displays $1.00") {
-//      
-//    }
-//
+    it("displays SOLD OUT given coke is sold out, $1.00 inserted and coke button is pressed, then displays $1.00") {
+      
+    }
+
 //    it("displays SOLD OUT given coke is sold out, $0.50 inserted and coke button is pressed, then displays $0.50") {
 //      
 //    }
