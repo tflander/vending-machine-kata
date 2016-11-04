@@ -1,10 +1,10 @@
 package todd
 import Money._
 
-class MoneyBox {
+class MoneyBox(initalCash: CoinCounts = CoinCounts(0,0,0)) {
  private val customerCoins = new CoinHold()
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
- var coinVault = CoinCounts(0,0,0)
+ var coinVault = initalCash
  
  def insert(coin: Coin) = {
     val coinWithValue = validate(coin)
@@ -33,12 +33,6 @@ class MoneyBox {
    return coinsToReturn
  }
  
-  def addCoinsToCoinVault(coins: CoinCounts) = {
-    coinVault.quarters += coins.quarters
-    coinVault.dimes += coins.dimes
-    coinVault.nickels += coins.nickels
-  }
-  
   def releaseChange(amount: Int): Seq[Coin] = {
     val change = new scala.collection.mutable.ListBuffer[Coin]()
     var remainder = amount

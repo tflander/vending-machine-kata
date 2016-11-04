@@ -85,8 +85,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
   
   describe("coin vault tests") {
     it("get requested amount from the coin vault for making change") {
-      val moneyBox = new MoneyBox()
-      moneyBox.addCoinsToCoinVault(CoinCounts(quarters=0, dimes=2, nickels=2))
+      val moneyBox = new MoneyBox(CoinCounts(quarters=0, dimes=2, nickels=2))
       moneyBox.vaultAmount should be(30)
       moneyBox.releaseChange(10) should be (Seq(dime))
       moneyBox.vaultAmount should be(20)
