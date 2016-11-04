@@ -4,9 +4,8 @@ class VendingMachine {
   
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
-  val coinHold = new CoinHold
+  val coinSlot = new CoinSlot
   var lastMessage: Option[String] = None
-  var insertedAmount = 0  // TODO: derive from coinHold
   
   private def penniesAsMoney(pennies: Int) = "%01.2f".format(pennies/100.0)
   
@@ -17,49 +16,56 @@ class VendingMachine {
       return msg
     }
     
-    if(insertedAmount == 0) {
+    if(coinSlot.coinHold.coinCollection.totalAmount == 0) {
       return "INSERT COIN" 
     }
     
-    return penniesAsMoney(insertedAmount)
+    return penniesAsMoney(coinSlot.coinHold.coinCollection.totalAmount)
   }
     
   def insertCoin(coin: Coin) = {
-    if(coin.valid) {
-      insertedAmount += coin.value
-      coinHold.coins += coin
-    } else {
-      coinReturn += coin
-    }
+    coinSlot.insert(coin)
+    coinReturn.clear()
+    coinReturn ++= coinSlot.rejectedCoins
   }
   
   def selectProduct(product: Product) = {
     
-    def dispenseChange() = {
+    val releasedCoins = coinSlot.releaseCoinsForProductCosting(product.cost)
+    if(releasedCoins.totalAmount == 0) {
+      lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))
+    } else {
+      dispensedProducts += product
+      lastMessage = Some("THANK YOU")
+      
+      // dispense change
       for(coin <- Money.validCoins) {
-        while(insertedAmount >= coin.value) {
-          insertedAmount -= coin.value
+        while(coinSlot.changeAmount >= coin.value) {
+          coinSlot.changeAmount -= coin.value
           coinReturn += coin.coin
         }
       }
     }
     
-    if(insertedAmount < product.cost) {
-      lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))
-    } else {
-      insertedAmount -= product.cost
-      dispensedProducts += product
-      lastMessage = Some("THANK YOU")
-      if(insertedAmount > 0) {
-        dispenseChange()
-      }
-      coinHold.coins.clear()
-    }
   }
   
   def pressCoinReturn() = {
-    insertedAmount = 0
-    coinReturn ++= coinHold.coins
-    coinHold.coins.clear()
+    // TODO: move to coin slot
+    import Money._
+    val a = coinSlot.coinHold.coinCollection
+    println(a)
+    for(i <- 1 to a.quarters) {
+      println("adding quarter")
+      coinReturn += quarter
+    }
+    for(i <- 1 to a.dimes) {
+      println("adding dime")
+      coinReturn += dime
+    }
+    for(i <- 1 to a.nickels) {
+      println("adding nickel")
+      coinReturn += nickel
+    }
+    coinSlot.coinHold.coinCollection.clear()
   }
 }
