@@ -18,9 +18,6 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
 
 class CoinHold {
   
-  // TODO: remove coins and re-implement VendingMachine
-  val coins = new scala.collection.mutable.ListBuffer[Coin]()
-
   val coinCollection = CoinCounts(0,0,0)
   
   def addCoin(coin: Coin) = {
