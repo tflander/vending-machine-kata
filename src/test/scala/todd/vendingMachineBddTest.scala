@@ -331,15 +331,21 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     }
     
     it("requires exact change when the money box has one dime and one nickel") {
-      
+      val initialCash = CoinCounts(quarters=0,dimes=1,nickels=1)
+      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      vendingMachine.display should be("EXACT CHANGE ONLY")                  
     }
     
     it("doesn't require exact change when the money box has one dime and two nickels") {
-      
+      val initialCash = CoinCounts(quarters=0,dimes=1,nickels=2)
+      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      vendingMachine.display should be("INSERT COIN")                        
     }
     
     it("doesn't require exact change when the money box has four nickels") {
-      
+      val initialCash = CoinCounts(quarters=0,dimes=0,nickels=4)
+      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      vendingMachine.display should be("INSERT COIN")                              
     }
     
     it("when exact change is required, and the customer enters too much, we give them their product and keep the change") {
