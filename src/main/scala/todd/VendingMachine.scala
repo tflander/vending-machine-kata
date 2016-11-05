@@ -18,7 +18,7 @@ class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var ini
     }
     
     if(moneyBox.insertedAmount == 0) {
-      if(moneyBox.coinVault.totalAmount < 20) {
+      if(moneyBox.coinVault.totalAmount < 20 || moneyBox.coinVault.nickels == 0) {
         return "EXACT CHANGE ONLY"
       } else {
         return "INSERT COIN"

@@ -316,6 +316,8 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     // The advantage of this approach is that it decouples the money logic from the inventory logic.
     // The disadvantage is that there are edge cases were we could get away with not requiring exact change.
     
+    // Note also that we need at least one nickel to ensure that we can make change
+    
     it("requires exact change when the money box is empty") {
       val vendingMachine = new VendingMachine(initialCash=CoinCounts(0,0,0))
       vendingMachine.moneyBox.coinVault.totalAmount should be(0)
