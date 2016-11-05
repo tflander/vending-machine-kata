@@ -348,7 +348,7 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
       vendingMachine.display should be("INSERT COIN")                              
     }
     
-    it("when exact change is required, and the customer enters too much, we give them their product and keep the change") {
+    it("gives customers their product and keeps the change when exact change is required") {
     }
     
     
