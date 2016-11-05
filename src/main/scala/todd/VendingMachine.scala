@@ -35,31 +35,12 @@ class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var ini
     if(product.cost > moneyBox.insertedAmount) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
     } else {
-      product.name match {
-        case "Cola" => {
-          if(inventory.isSoldOut(Cola)) {
-            lastMessage = Some("SOLD OUT")
-            return
-          } else {
-            inventory.removeOne(Cola)
-          }
-        }
-        case "Chips" => {
-          if(inventory.isSoldOut(Chips)) {
-            lastMessage = Some("SOLD OUT")
-            return
-          } else {
-            inventory.removeOne(Chips)
-          }
-        }
-        case "Candy" => {
-          if(inventory.isSoldOut(Candy)) {
-            lastMessage = Some("SOLD OUT")
-            return
-          } else {
-            inventory.removeOne(Candy)
-          }
-        }
+      
+      if(inventory.isSoldOut(product)) {
+         lastMessage = Some("SOLD OUT")
+         return        
+      } else {
+        inventory.removeOne(product)
       }
       
       lastMessage = Some("THANK YOU")      
