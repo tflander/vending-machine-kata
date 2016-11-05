@@ -228,25 +228,74 @@ When the item selected by the customer is out of stock, the machine displays SOL
 
      */
     
-    it("displays SOLD OUT given coke is sold out, $1.00 inserted and coke button is pressed, then displays $1.00") {
-      
+    it("displays SOLD OUT given cola is sold out, $1.00 inserted and cola button is pressed, then displays $1.00") {
+      val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Cola)
+      vendingMachine.inventory.isSoldOut(Cola) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("1.00")      
     }
 
-//    it("displays SOLD OUT given coke is sold out, $0.50 inserted and coke button is pressed, then displays $0.50") {
-//      
-//    }
-//    
-//    it("displays SOLD OUT given coke is sold out, no money inserted and coke button is pressed, then displays INSERT COIN") {
-//      
-//    }
-//    
-//    it("displays SOLD OUT given chips are sold out, $1.00 inserted and chips button is pressed, then displays $1.00") {
-//      
-//    }
-//    
-//    it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
-//      
-//    }
+    it("displays SOLD OUT given cola is sold out, $0.50 inserted and cola button is pressed, then displays $0.50") {
+      val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Cola)
+      vendingMachine.inventory.isSoldOut(Cola) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("0.50")            
+    }
+    
+    it("displays SOLD OUT given cola is sold out, no money inserted and cola button is pressed, then displays INSERT COIN") {
+      val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      vendingMachine.selectProduct(Cola)
+      vendingMachine.inventory.isSoldOut(Cola) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("INSERT COIN")                  
+    }
+    
+    it("displays SOLD OUT given chips are sold out, $1.00 inserted and chips button is pressed, then displays $1.00") {
+      val vendingMachine = new VendingMachine(initialColas=3, initialChips=0, initialCandy=2)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.inventory.isSoldOut(Chips) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("1.00")            
+    }
+    
+    it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
+      val vendingMachine = new VendingMachine(initialColas=3, initialChips=9, initialCandy=0)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.inventory.isSoldOut(Candy) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("1.00")                  
+    }
     
   }
   
