@@ -153,5 +153,12 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.numChips should be(10)      
       vendingMachine.numCandy should be(10)
     }
+    
+    it("can have custom quantities") {
+      val vendingMachine = new VendingMachine(numColas=2, numChips=1, numCandy=0)
+      vendingMachine.numColas should be(2)      
+      vendingMachine.numChips should be(1)      
+      vendingMachine.numCandy should be(0)
+    }
   }
 }
