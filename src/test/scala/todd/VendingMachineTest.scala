@@ -145,4 +145,13 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("INSERT COIN")      
     }
   }
+  
+  describe ("product quantity tests") {
+    it("has 10 of each product by default") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.numColas should be(10)      
+      vendingMachine.numChips should be(10)      
+      vendingMachine.numCandy should be(10)
+    }
+  }
 }
