@@ -337,6 +337,11 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     it("doesn't require exact change when the money box has four nickels") {
       
     }
+    
+    it("when exact change is required, and the customer enters too much, we give them their product and keep the change") {
+    }
+    
+    
   }
       
 
