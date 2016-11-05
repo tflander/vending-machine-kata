@@ -160,5 +160,34 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.numChips should be(1)      
       vendingMachine.numCandy should be(0)
     }
+    
+    it("has one less when a purchase is completed") {
+      val vendingMachine = new VendingMachine()
+      vendingMachine.numColas should be(10)      
+      vendingMachine.numChips should be(10)      
+      vendingMachine.numCandy should be(10)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)
+      vendingMachine.selectProduct(Cola)
+      vendingMachine.numColas should be(9)            
+      vendingMachine.numChips should be(10)      
+      vendingMachine.numCandy should be(10)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.numColas should be(9)            
+      vendingMachine.numChips should be(9)      
+      vendingMachine.numCandy should be(10)
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.numColas should be(9)            
+      vendingMachine.numChips should be(9)      
+      vendingMachine.numCandy should be(9)
+    }
   }
 }

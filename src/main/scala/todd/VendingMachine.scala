@@ -1,6 +1,6 @@
 package todd
 
-class VendingMachine(val numColas: Int = 10, val numChips: Int = 10, val numCandy: Int = 10)  {
+class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCandy: Int = 10)  {
   
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
@@ -38,6 +38,11 @@ class VendingMachine(val numColas: Int = 10, val numChips: Int = 10, val numCand
       dispensedProducts += product
       lastMessage = Some("THANK YOU")
       coinReturn ++= moneyBox.releaseChange(change)
+      product.name match {
+        case "Cola" => numColas -= 1
+        case "Chips" => numChips -= 1
+        case "Candy" => numCandy -= 1
+      }
     }
     
   }
