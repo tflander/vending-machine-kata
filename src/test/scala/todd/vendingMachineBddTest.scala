@@ -230,6 +230,7 @@ When the item selected by the customer is out of stock, the machine displays SOL
     
     it("displays SOLD OUT given cola is sold out, $1.00 inserted and cola button is pressed, then displays $1.00") {
       val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      val initialVaultCash = vendingMachine.moneyBox.coinVault.totalAmount
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -238,37 +239,40 @@ When the item selected by the customer is out of stock, the machine displays SOL
       vendingMachine.inventory.isSoldOut(Cola) should be(true)      
       vendingMachine.dispensedProducts.isEmpty should be(true)
       vendingMachine.coinReturn.isEmpty should be (true)
-      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(initialVaultCash)
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("1.00")      
     }
 
     it("displays SOLD OUT given cola is sold out, $0.50 inserted and cola button is pressed, then displays $0.50") {
       val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      val initialVaultCash = vendingMachine.moneyBox.coinVault.totalAmount
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.selectProduct(Cola)
       vendingMachine.inventory.isSoldOut(Cola) should be(true)      
       vendingMachine.dispensedProducts.isEmpty should be(true)
       vendingMachine.coinReturn.isEmpty should be (true)
-      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(initialVaultCash)
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("0.50")            
     }
     
     it("displays SOLD OUT given cola is sold out, no money inserted and cola button is pressed, then displays INSERT COIN") {
       val vendingMachine = new VendingMachine(initialColas=0, initialChips=1, initialCandy=2)
+      val initialVaultCash = vendingMachine.moneyBox.coinVault.totalAmount
       vendingMachine.selectProduct(Cola)
       vendingMachine.inventory.isSoldOut(Cola) should be(true)      
       vendingMachine.dispensedProducts.isEmpty should be(true)
       vendingMachine.coinReturn.isEmpty should be (true)
-      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(initialVaultCash)
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("INSERT COIN")                  
     }
     
     it("displays SOLD OUT given chips are sold out, $1.00 inserted and chips button is pressed, then displays $1.00") {
       val vendingMachine = new VendingMachine(initialColas=3, initialChips=0, initialCandy=2)
+      val initialVaultCash = vendingMachine.moneyBox.coinVault.totalAmount
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -277,13 +281,13 @@ When the item selected by the customer is out of stock, the machine displays SOL
       vendingMachine.inventory.isSoldOut(Chips) should be(true)      
       vendingMachine.dispensedProducts.isEmpty should be(true)
       vendingMachine.coinReturn.isEmpty should be (true)
-      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(initialVaultCash)
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("1.00")            
     }
     
     it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
-      val vendingMachine = new VendingMachine(initialColas=3, initialChips=9, initialCandy=0)
+      val vendingMachine = new VendingMachine(initialColas=3, initialChips=9, initialCandy=0, initialCash=CoinCounts(0,0,0))
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -313,11 +317,6 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     // The disadvantage is that there are edge cases were we could get away with not requiring exact change.
     
     it("requires exact change when the money box is empty") {
-      
-    }
-    
-    it("requires exact change when the money box has three nickels") {
-      
     }
     
     it("requires exact change when the money box has three nickels") {

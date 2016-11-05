@@ -1,11 +1,11 @@
 package todd
 
-class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var initialCandy: Int = 10)  {
+class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var initialCandy: Int = 10, initialCash: CoinCounts = CoinCounts(0,5,10))  {
   
   val inventory = new Inventory(initialColas, initialChips, initialCandy)
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
-  val moneyBox = new MoneyBox
+  val moneyBox = new MoneyBox(initialCash)
   var lastMessage: Option[String] = None
   
   private def penniesAsMoney(pennies: Int) = "%01.2f".format(pennies/100.0)

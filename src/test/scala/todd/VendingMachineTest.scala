@@ -191,7 +191,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
     
     it("doesn't allow purchase when out") {
-      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0)
+      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0, initialCash=CoinCounts(0,0,0))
       vendingMachine.moneyBox.coinVault.dimes=1
 
       vendingMachine.insertCoin(quarter)    
@@ -215,5 +215,5 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("INSERT COIN")      
     }
-  }
+  }  
 }
