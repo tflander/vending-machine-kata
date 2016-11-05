@@ -201,6 +201,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.numCandy should be(0)
       vendingMachine.dispensedProducts.isEmpty should be(true)
       vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.moneyBox.coinVault.totalAmount should be(10)
       // TODO: test display
     }
   }
