@@ -29,32 +29,40 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
     coinReturn ++= moneyBox.rejectedCoins
   }
   
-  def selectProduct(product: Product) = {
+  def selectProduct(product: Product): Unit = {
     
     if(product.cost > moneyBox.insertedAmount) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
     } else {
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)
-      dispensedProducts += product
       lastMessage = Some("THANK YOU")
       coinReturn ++= moneyBox.releaseChange(change)
       product.name match {
         case "Cola" => {
-          if(numColas > 0) {
+          if(numColas == 0) {
+            return
+          } else {
             numColas -= 1
           }
         }
         case "Chips" => {
-          if(numChips > 0) {
+          if(numChips == 0) {
+            return
+          } else {
             numChips -= 1
           }
         }
         case "Candy" => {
-          if(numCandy > 0) {
+          if(numCandy == 0) {
+            return
+          } else {
             numCandy -= 1
           }
         }
       }
+      
+      dispensedProducts += product
+      
     }
     
   }
