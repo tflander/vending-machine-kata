@@ -18,4 +18,5 @@ class Inventory(initialColas: Int = 10, initialChips: Int = 10, initialCandy: In
   }
   
   def isAvailable(product: Product) = quantityFor(product) > 0
+  def isSoldOut(product: Product) = !isAvailable(product)
 }

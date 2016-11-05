@@ -32,5 +32,13 @@ class InventoryTest extends FunSpec with ShouldMatchers {
     inventory.isAvailable(Chips) should be(false)
     inventory.isAvailable(Candy) should be(true)
   }
+
+  it("lets you check if inventory is sold out") {
+    val inventory = new Inventory(initialColas=1, initialChips=0, initialCandy=3)
+    inventory.isSoldOut(Cola) should be(false)
+    inventory.isSoldOut(Chips) should be(true)
+    inventory.isSoldOut(Candy) should be(false)
+  }
+  
   
 }
