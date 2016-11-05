@@ -10,4 +10,10 @@ class Inventory(initialColas: Int = 10, initialChips: Int = 10, initialCandy: In
   def quantityFor(product: Product): Int = {
     return inventory.getOrElse(product, throw new IllegalArgumentException("invalid product " + product))
   }
+  
+  def removeOne(product: Product) = {
+    val currentQuantity = quantityFor(product)
+    if(currentQuantity == 0) throw new IllegalStateException("quantity for " + product + " is already zero")
+    inventory += product -> (currentQuantity - 1)
+  }
 }

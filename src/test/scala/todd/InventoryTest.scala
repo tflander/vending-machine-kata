@@ -17,4 +17,14 @@ class InventoryTest extends FunSpec with ShouldMatchers {
     inventory.quantityFor(Candy) should be(3)    
   }
   
+  it("can decrement quantities, but not past zero") {
+    val inventory = new Inventory(initialColas=1, initialChips=2, initialCandy=3)
+    inventory.removeOne(Cola)
+    inventory.quantityFor(Cola) should be(0)
+    intercept[IllegalStateException] {
+      inventory.removeOne(Cola)      
+    }
+    
+  }
+  
 }
