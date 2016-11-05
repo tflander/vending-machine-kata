@@ -1,7 +1,8 @@
 package todd
 
-class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCandy: Int = 10)  {
+class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var initialCandy: Int = 10)  {
   
+  val inventory = new Inventory(initialColas, initialChips, initialCandy)
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()
   val dispensedProducts = new scala.collection.mutable.ListBuffer[Product]()
   val moneyBox = new MoneyBox
@@ -36,27 +37,27 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
     } else {
       product.name match {
         case "Cola" => {
-          if(numColas == 0) {
+          if(inventory.isSoldOut(Cola)) {
             lastMessage = Some("SOLD OUT")
             return
           } else {
-            numColas -= 1
+            inventory.removeOne(Cola)
           }
         }
         case "Chips" => {
-          if(numChips == 0) {
+          if(inventory.isSoldOut(Chips)) {
             lastMessage = Some("SOLD OUT")
             return
           } else {
-            numChips -= 1
+            inventory.removeOne(Chips)
           }
         }
         case "Candy" => {
-          if(numCandy == 0) {
+          if(inventory.isSoldOut(Candy)) {
             lastMessage = Some("SOLD OUT")
             return
           } else {
-            numCandy -= 1
+            inventory.removeOne(Candy)
           }
         }
       }
