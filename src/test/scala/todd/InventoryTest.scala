@@ -24,7 +24,13 @@ class InventoryTest extends FunSpec with ShouldMatchers {
     intercept[IllegalStateException] {
       inventory.removeOne(Cola)      
     }
-    
+  }
+  
+  it("lets you check if inventory is available") {
+    val inventory = new Inventory(initialColas=1, initialChips=0, initialCandy=3)
+    inventory.isAvailable(Cola) should be(true)
+    inventory.isAvailable(Chips) should be(false)
+    inventory.isAvailable(Candy) should be(true)
   }
   
 }

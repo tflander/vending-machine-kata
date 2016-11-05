@@ -16,4 +16,6 @@ class Inventory(initialColas: Int = 10, initialChips: Int = 10, initialCandy: In
     if(currentQuantity == 0) throw new IllegalStateException("quantity for " + product + " is already zero")
     inventory += product -> (currentQuantity - 1)
   }
+  
+  def isAvailable(product: Product) = quantityFor(product) > 0
 }
