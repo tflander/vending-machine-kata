@@ -32,23 +32,21 @@ class VendingMachine(initialColas: Int = 10, var initialChips: Int = 10, var ini
   
   def selectProduct(product: Product): Unit = {
     
-    if(product.cost > moneyBox.insertedAmount) {
-      lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
-    } else {
-      
       if(inventory.isSoldOut(product)) {
          lastMessage = Some("SOLD OUT")
          return        
-      } else {
-        inventory.removeOne(product)
+      }
+
+      if(product.cost > moneyBox.insertedAmount) {
+        lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))
+        return
       }
       
+      inventory.removeOne(product)
       lastMessage = Some("THANK YOU")      
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)      
       dispensedProducts += product
       coinReturn ++= moneyBox.releaseChange(change)
-      
-    }
     
   }
   

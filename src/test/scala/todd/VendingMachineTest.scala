@@ -205,5 +205,15 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.display should be("SOLD OUT")
       vendingMachine.display should be("0.75")
     }
+    
+    it("shows if a product is sold out when you press the button without inserting coins") {
+      val vendingMachine = new VendingMachine(initialColas=2, initialChips=0, initialCandy=1)
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.inventory.isSoldOut(Chips) should be(true)      
+      vendingMachine.dispensedProducts.isEmpty should be(true)
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.display should be("SOLD OUT")
+      vendingMachine.display should be("INSERT COIN")      
+    }
   }
 }
