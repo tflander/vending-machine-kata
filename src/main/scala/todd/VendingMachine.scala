@@ -39,9 +39,21 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
       lastMessage = Some("THANK YOU")
       coinReturn ++= moneyBox.releaseChange(change)
       product.name match {
-        case "Cola" => numColas -= 1
-        case "Chips" => numChips -= 1
-        case "Candy" => numCandy -= 1
+        case "Cola" => {
+          if(numColas > 0) {
+            numColas -= 1
+          }
+        }
+        case "Chips" => {
+          if(numChips > 0) {
+            numChips -= 1
+          }
+        }
+        case "Candy" => {
+          if(numCandy > 0) {
+            numCandy -= 1
+          }
+        }
       }
     }
     
