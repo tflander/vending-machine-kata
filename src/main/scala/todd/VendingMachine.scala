@@ -36,7 +36,6 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
     } else {
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)
       lastMessage = Some("THANK YOU")
-      coinReturn ++= moneyBox.releaseChange(change)
       product.name match {
         case "Cola" => {
           if(numColas == 0) {
@@ -62,6 +61,7 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
       }
       
       dispensedProducts += product
+      coinReturn ++= moneyBox.releaseChange(change)
       
     }
     
