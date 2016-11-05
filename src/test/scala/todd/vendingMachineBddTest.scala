@@ -317,6 +317,9 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     // The disadvantage is that there are edge cases were we could get away with not requiring exact change.
     
     it("requires exact change when the money box is empty") {
+      val vendingMachine = new VendingMachine(initialCash=CoinCounts(0,0,0))
+      vendingMachine.moneyBox.coinVault.totalAmount should be(0)
+      vendingMachine.display should be("EXACT CHANGE ONLY")
     }
     
     it("requires exact change when the money box has three nickels") {
