@@ -34,10 +34,10 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
     if(product.cost > moneyBox.insertedAmount) {
       lastMessage = Some("PRICE $" + penniesAsMoney(product.cost))      
     } else {
-      lastMessage = Some("THANK YOU")
       product.name match {
         case "Cola" => {
           if(numColas == 0) {
+            lastMessage = Some("SOLD OUT")
             return
           } else {
             numColas -= 1
@@ -45,6 +45,7 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
         }
         case "Chips" => {
           if(numChips == 0) {
+            lastMessage = Some("SOLD OUT")
             return
           } else {
             numChips -= 1
@@ -52,6 +53,7 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
         }
         case "Candy" => {
           if(numCandy == 0) {
+            lastMessage = Some("SOLD OUT")
             return
           } else {
             numCandy -= 1
@@ -59,6 +61,7 @@ class VendingMachine(var numColas: Int = 10, var numChips: Int = 10, var numCand
         }
       }
       
+      lastMessage = Some("THANK YOU")      
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(product.cost)      
       dispensedProducts += product
       coinReturn ++= moneyBox.releaseChange(change)
