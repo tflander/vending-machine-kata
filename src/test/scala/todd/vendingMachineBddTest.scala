@@ -349,6 +349,17 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     }
     
     it("gives customers their product and keeps the change when exact change is required") {
+      val vendingMachine = new VendingMachine(initialCash=CoinCounts(0,0,0))
+      vendingMachine.display should be("EXACT CHANGE ONLY")            
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Candy)
+      vendingMachine.dispensedProducts should be(Seq(Candy))
+      vendingMachine.coinReturn.isEmpty should be (true)
+      vendingMachine.display should be("THANK YOU")            
+      vendingMachine.display should be("EXACT CHANGE ONLY")     
+      vendingMachine.moneyBox.coinVault.totalAmount should be(75)
     }
     
     

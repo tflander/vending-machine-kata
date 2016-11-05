@@ -256,5 +256,19 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
       vendingMachine.moneyBox.coinVault.totalAmount should be(75)
     }
 
+    it("returns extra coins entered when exact change is required") {
+      val vendingMachine = new VendingMachine(initialCash=CoinCounts(0,0,0))
+      vendingMachine.display should be("EXACT CHANGE ONLY")            
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.insertCoin(quarter)    
+      vendingMachine.selectProduct(Chips)
+      vendingMachine.dispensedProducts should be(Seq(Chips))
+      vendingMachine.coinReturn should be (Seq(quarter))
+      vendingMachine.display should be("THANK YOU")            
+      vendingMachine.display should be("EXACT CHANGE ONLY")     
+      vendingMachine.moneyBox.coinVault.totalAmount should be(50)
+    }
+
   }
 }
