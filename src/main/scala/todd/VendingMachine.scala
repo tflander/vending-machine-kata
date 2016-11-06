@@ -1,6 +1,6 @@
 package todd
 
-class VendingMachine(initialColas: Int = 10, initialChips: Int = 10, initialCandy: Int = 10, initialCash: CoinCounts = CoinCounts(0,5,10))  {
+class VendingMachine(initialColas: Int = 10, initialChips: Int = 10, initialCandy: Int = 10, initialCash: CoinHold = CoinHold(0,5,10))  {
   
   val inventory = new Inventory(initialColas, initialChips, initialCandy)
   val coinReturn = new scala.collection.mutable.ListBuffer[Coin]()

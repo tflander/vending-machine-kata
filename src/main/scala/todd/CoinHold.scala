@@ -1,7 +1,7 @@
 package todd
 import Money._
 
-case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
+case class CoinHold(var quarters: Int, var dimes: Int, var nickels: Int) {
   def totalAmount: Int = {
     quarters * quarter.value +
     dimes * dime.value +
@@ -28,7 +28,7 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     return coins
   }
   
-  def +=(coins: CoinCounts) = {
+  def +=(coins: CoinHold) = {
     quarters += coins.quarters
     dimes += coins.dimes
     nickels += coins.nickels
@@ -55,24 +55,19 @@ case class CoinCounts(var quarters: Int, var dimes: Int, var nickels: Int) {
     return change    
   }
   
-}
-
-class CoinHold {
-  
-  val coinCollection = CoinCounts(0,0,0)
-  
   def addCoin(coin: Coin) = {
     val coinWithValue = validate(coin)
     coinWithValue match {
       case Some(goodCoin) => {
         goodCoin.value match {
-          case quarter.value => coinCollection.quarters += 1
-          case dime.value => coinCollection.dimes += 1
-          case nickel.value => coinCollection.nickels += 1
+          case quarter.value => quarters += 1
+          case dime.value => dimes += 1
+          case nickel.value => nickels += 1
         }
       }
       case None => { throw new IllegalArgumentException("The coin hold cannot accept invalid coins") }
-    }
-  }
+    }  
   
+  }
+
 }

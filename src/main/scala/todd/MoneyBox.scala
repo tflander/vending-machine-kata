@@ -1,8 +1,8 @@
 package todd
 import Money._
 
-class MoneyBox(initalCash: CoinCounts = CoinCounts(0,0,0)) {
- private val customerCoins = new CoinHold()
+class MoneyBox(initalCash: CoinHold = CoinHold(0,0,0)) {
+ private val customerCoins = CoinHold(0,0,0)
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var coinVault = initalCash
  
@@ -15,21 +15,21 @@ class MoneyBox(initalCash: CoinCounts = CoinCounts(0,0,0)) {
     }
  }
  
- def insertedAmount = customerCoins.coinCollection.totalAmount
+ def insertedAmount = customerCoins.totalAmount
  
  def vaultAmount = coinVault.totalAmount
  
  def acceptCoinsAndReturnChangeForProductCosting(cost: Int): Int = {
    require (cost <= insertedAmount)
-   coinVault +=  customerCoins.coinCollection
+   coinVault +=  customerCoins
    val change = insertedAmount - cost
-   customerCoins.coinCollection.clear()
+   customerCoins.clear()
    return change
  }
  
  def returnCoins(): Seq[Coin] = {
-   val coinsToReturn = customerCoins.coinCollection.toCoins
-   customerCoins.coinCollection.clear()
+   val coinsToReturn = customerCoins.toCoins
+   customerCoins.clear()
    return coinsToReturn
  }
  
