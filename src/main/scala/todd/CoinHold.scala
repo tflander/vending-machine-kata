@@ -1,7 +1,7 @@
 package todd
 import Money._
 
-case class CoinHold(var quarters: Int, var dimes: Int, var nickels: Int) {
+class CoinHold(var quarters: Int, var dimes: Int, var nickels: Int) {
   def totalAmount: Int = {
     quarters * quarter.value +
     dimes * dime.value +
@@ -70,4 +70,13 @@ case class CoinHold(var quarters: Int, var dimes: Int, var nickels: Int) {
   
   }
 
-}
+  def canEqual(a: Any) = a.isInstanceOf[CoinHold]
+      override def equals(that: Any): Boolean =
+          that match {
+              case that: CoinHold => that.canEqual(this) && this.hashCode == that.hashCode
+              case _ => false
+       }
+      override def hashCode: Int = {
+          return 31 * quarters + 37 * dimes + 41 + nickels 
+      }  
+  }

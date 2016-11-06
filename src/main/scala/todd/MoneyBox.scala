@@ -1,8 +1,8 @@
 package todd
 import Money._
 
-class MoneyBox(initalCash: CoinHold = CoinHold(0,0,0)) {
- private val customerCoins = CoinHold(0,0,0)
+class MoneyBox(initalCash: CoinHold = new CoinHold(0,0,0)) {
+ private val customerCoins = new CoinHold(0,0,0)
  val rejectedCoins = new scala.collection.mutable.ListBuffer[Coin]()
  var coinVault = initalCash
  

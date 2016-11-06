@@ -31,7 +31,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(nickel)
       moneyBox.insertedAmount should be(40)
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
-      moneyBox.coinVault should be(CoinHold(quarters=1, dimes=1, nickels=1))    
+      moneyBox.coinVault should be(new CoinHold(quarters=1, dimes=1, nickels=1))    
       change should be(0)
       moneyBox.insertedAmount should be(0)
     }
@@ -45,7 +45,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(nickel)
       moneyBox.insertedAmount should be(40)
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
-      moneyBox.coinVault should be(CoinHold(quarters=0, dimes=3, nickels=2))    
+      moneyBox.coinVault should be(new CoinHold(quarters=0, dimes=3, nickels=2))    
       change should be(0)
       moneyBox.insertedAmount should be(0)
     }
@@ -67,7 +67,7 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
       moneyBox.insert(dime)
       moneyBox.insertedAmount should be(45)
       val change = moneyBox.acceptCoinsAndReturnChangeForProductCosting(40)
-      moneyBox.coinVault should be(CoinHold(quarters=1, dimes=2, nickels=0))
+      moneyBox.coinVault should be(new CoinHold(quarters=1, dimes=2, nickels=0))
       change should be(5)
       moneyBox.insertedAmount should be(0)      
     }
@@ -85,11 +85,11 @@ class MoneyBoxTest extends FunSpec with ShouldMatchers {
   
   describe("coin vault tests") {
     it("get requested amount from the coin vault for making change") {
-      val moneyBox = new MoneyBox(CoinHold(quarters=0, dimes=2, nickels=2))
+      val moneyBox = new MoneyBox(new CoinHold(quarters=0, dimes=2, nickels=2))
       moneyBox.vaultAmount should be(30)
       moneyBox.releaseChange(10) should be (Seq(dime))
       moneyBox.vaultAmount should be(20)
-      moneyBox.coinVault should be(CoinHold(quarters=0, dimes=1, nickels=2))
+      moneyBox.coinVault should be(new CoinHold(quarters=0, dimes=1, nickels=2))
     }
   }
 }

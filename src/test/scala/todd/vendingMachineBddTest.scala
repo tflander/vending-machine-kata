@@ -287,7 +287,7 @@ When the item selected by the customer is out of stock, the machine displays SOL
     }
     
     it("displays SOLD OUT given candy is sold out, $1.00 inserted and candy button is pressed, then displays $1.00") {
-      val vendingMachine = new VendingMachine(initialColas=3, initialChips=9, initialCandy=0, initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialColas=3, initialChips=9, initialCandy=0, initialCash = new CoinHold(0,0,0))
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -319,37 +319,37 @@ display EXACT CHANGE ONLY instead of INSERT COIN.
     // Note also that we need at least one nickel to ensure that we can make change
     
     it("requires exact change when the money box is empty") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.moneyBox.coinVault.totalAmount should be(0)
       vendingMachine.display should be("EXACT CHANGE ONLY")
     }
     
     it("requires exact change when the money box has three nickels") {
-      val initialCash = CoinHold(quarters=0,dimes=0,nickels=3)
-      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      val initialCash = new CoinHold(quarters=0,dimes=0,nickels=3)
+      val vendingMachine = new VendingMachine(initialCash = initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")            
     }
     
     it("requires exact change when the money box has one dime and one nickel") {
-      val initialCash = CoinHold(quarters=0,dimes=1,nickels=1)
-      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      val initialCash = new CoinHold(quarters=0,dimes=1,nickels=1)
+      val vendingMachine = new VendingMachine(initialCash = initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")                  
     }
     
     it("doesn't require exact change when the money box has one dime and two nickels") {
-      val initialCash = CoinHold(quarters=0,dimes=1,nickels=2)
-      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      val initialCash = new CoinHold(quarters=0,dimes=1,nickels=2)
+      val vendingMachine = new VendingMachine(initialCash = initialCash)
       vendingMachine.display should be("INSERT COIN")                        
     }
     
     it("doesn't require exact change when the money box has four nickels") {
-      val initialCash = CoinHold(quarters=0,dimes=0,nickels=4)
-      val vendingMachine = new VendingMachine(initialCash=initialCash)
+      val initialCash = new CoinHold(quarters=0,dimes=0,nickels=4)
+      val vendingMachine = new VendingMachine(initialCash = initialCash)
       vendingMachine.display should be("INSERT COIN")                              
     }
     
     it("gives customers their product and keeps the change when exact change is required") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.display should be("EXACT CHANGE ONLY")            
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    

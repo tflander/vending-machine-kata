@@ -191,7 +191,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
     
     it("doesn't allow purchase when out") {
-      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0, initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0, initialCash = new CoinHold(0,0,0))
       vendingMachine.moneyBox.coinVault.dimes=1
 
       vendingMachine.insertCoin(quarter)    
@@ -219,31 +219,31 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
   
   describe("Exact change tests") {
     it("requires exact change when the money box is empty") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.moneyBox.coinVault.totalAmount should be(0)
       vendingMachine.display should be("EXACT CHANGE ONLY")
     }
     
     it("requires exact change when the money box has three nickels") {
-      val initialCash = CoinHold(quarters=0,dimes=0,nickels=3)
+      val initialCash = new CoinHold(quarters=0,dimes=0,nickels=3)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")      
     }
     
     it("requires exact change when the money box has one dime and one nickel") {
-      val initialCash = CoinHold(quarters=0,dimes=1,nickels=1)
+      val initialCash = new CoinHold(quarters=0,dimes=1,nickels=1)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")            
     }
     
     it("requires exact change when the money box has two dimes and no nickels") {
-      val initialCash = CoinHold(quarters=0,dimes=2,nickels=0)
+      val initialCash = new CoinHold(quarters=0,dimes=2,nickels=0)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")            
     }
     
     it("gives customers their product and keeps the change when exact change is required") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.display should be("EXACT CHANGE ONLY")            
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -257,7 +257,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
 
     it("returns extra coins entered when exact change is required") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.display should be("EXACT CHANGE ONLY")            
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -271,7 +271,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
 
     it("no longer requires exact change when the previous customer makes a purchase") {
-      val vendingMachine = new VendingMachine(initialCash=CoinHold(0,0,0))
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,0,0))
       vendingMachine.display should be("EXACT CHANGE ONLY")            
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(dime)    
