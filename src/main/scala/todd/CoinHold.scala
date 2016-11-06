@@ -1,7 +1,12 @@
 package todd
 import Money._
 
-class CoinHold(var quarters: Int, var dimes: Int, var nickels: Int) {
+class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
+  
+  var quarters = initialQuarters
+  var dimes = initialDimes
+  var nickels = initialNickels
+  
   def totalAmount: Int = {
     quarters * quarter.value +
     dimes * dime.value +

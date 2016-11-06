@@ -8,20 +8,20 @@ class CoinHoldTest extends FunSpec with ShouldMatchers {
   describe("coin count tests") {
     
     it("counts out coins") {
-      val coinCounts = new CoinHold(quarters=1, dimes=2, nickels=3)
+      val coinCounts = new CoinHold(initialQuarters=1, initialDimes=2, initialNickels=3)
       coinCounts.toCoins should be (Seq(quarter, dime, dime, nickel, nickel, nickel))
     }
     
     it("adds coin counts") {
-      val coins = new CoinHold(quarters=1, dimes=2, nickels=3) 
-      coins += new CoinHold(quarters=1, dimes=2, nickels=3) 
-      coins should be(new CoinHold(quarters=2, dimes=4, nickels=6))
+      val coins = new CoinHold(initialQuarters=1, initialDimes=2, initialNickels=3) 
+      coins += new CoinHold(initialQuarters=1, initialDimes=2, initialNickels=3) 
+      coins should be(new CoinHold(initialQuarters=2, initialDimes=4, initialNickels=6))
     }
     
     it("subtracts coin counts") {
-      val coins = new CoinHold(quarters=1, dimes=2, nickels=3) 
+      val coins = new CoinHold(initialQuarters=1, initialDimes=2, initialNickels=3) 
       val coinsRemoved = coins.removeAmountWithFewestCoins(40) 
-      coins should be(new CoinHold(quarters=0, dimes=1, nickels=2))
+      coins should be(new CoinHold(initialQuarters=0, initialDimes=1, initialNickels=2))
       coinsRemoved should be(Seq(quarter, dime, nickel))
     }
   }

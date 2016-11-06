@@ -225,19 +225,19 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
     
     it("requires exact change when the money box has three nickels") {
-      val initialCash = new CoinHold(quarters=0,dimes=0,nickels=3)
+      val initialCash = new CoinHold(initialQuarters=0,initialDimes=0,initialNickels=3)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")      
     }
     
     it("requires exact change when the money box has one dime and one nickel") {
-      val initialCash = new CoinHold(quarters=0,dimes=1,nickels=1)
+      val initialCash = new CoinHold(initialQuarters=0,initialDimes=1,initialNickels=1)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")            
     }
     
     it("requires exact change when the money box has two dimes and no nickels") {
-      val initialCash = new CoinHold(quarters=0,dimes=2,nickels=0)
+      val initialCash = new CoinHold(initialQuarters=0,initialDimes=2,initialNickels=0)
       val vendingMachine = new VendingMachine(initialCash=initialCash)
       vendingMachine.display should be("EXACT CHANGE ONLY")            
     }
