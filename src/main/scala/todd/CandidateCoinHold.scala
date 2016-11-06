@@ -1,14 +1,12 @@
 package todd
 import Money._
 
-private case class CoinAndCount (coin: CoinWithValue, count: Int) 
-
-class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
+class CandidateCoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
   
-  private val cash = new scala.collection.mutable.HashSet[CoinAndCount]()
-  cash += CoinAndCount(Quarter, initialQuarters)
-  cash += CoinAndCount(Dime, initialDimes)
-  cash += CoinAndCount(Nickel, initialNickels)
+  private val cash = new scala.collection.mutable.HashMap[CoinWithValue, Int]()
+  cash += Quarter -> initialQuarters
+  cash += Dime -> initialDimes
+  cash += Nickel -> initialNickels
 
   private def getCountForCoin(coin: CoinWithValue) = cash.getOrElse(coin, throw new IllegalArgumentException("invalid coin"))
   
@@ -17,8 +15,12 @@ class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
   def nickels = getCountForCoin(Nickel)
   
   private def applyToCash(f: Set[(Coin, Int)] => Any): Any = {
-    val coinsAndCounts = for(coin <- validCoins) yield (coin.coin, getCountForCoin(coin))
-    return f(coinsAndCounts)
+    
+    for(coinAndCount: (CoinWithValue, Int) <- cash) {
+    }
+    
+//    val coinsAndCounts = for(coin <- validCoins) yield (coin.coin, getCountForCoin(coin))
+//    return f(coinsAndCounts)
   }
   
   def totalAmount: Int = {
