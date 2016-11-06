@@ -123,8 +123,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
   
   describe("change tests") {
     it("gives change when necessary") {
-      val vendingMachine = new VendingMachine()
-      vendingMachine.moneyBox.coinVault.dimes=1
+      val vendingMachine = new VendingMachine(initialCash = new CoinHold(0,1,0))
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    
@@ -191,8 +190,7 @@ class VendingMachineTest extends FunSpec with ShouldMatchers {
     }
     
     it("doesn't allow purchase when out") {
-      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0, initialCash = new CoinHold(0,0,0))
-      vendingMachine.moneyBox.coinVault.dimes=1
+      val vendingMachine = new VendingMachine(initialColas=2, initialChips=1, initialCandy=0, initialCash = new CoinHold(0,1,0))
 
       vendingMachine.insertCoin(quarter)    
       vendingMachine.insertCoin(quarter)    

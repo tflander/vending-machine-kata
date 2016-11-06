@@ -3,9 +3,14 @@ import Money._
 
 class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
   
-  var quarters = initialQuarters
-  var dimes = initialDimes
-  var nickels = initialNickels
+  private val cash = new scala.collection.mutable.HashMap[CoinWithValue, Int]()
+  cash += Quarter -> initialQuarters
+  cash += Dime -> initialDimes
+  cash += Nickel -> initialNickels
+
+  def quarters = cash.getOrElse(Quarter, throw new IllegalArgumentException("invalid coin"))
+  def dimes = cash.getOrElse(Dime, throw new IllegalArgumentException("invalid coin"))
+  def nickels = cash.getOrElse(Nickel, throw new IllegalArgumentException("invalid coin"))
   
   def totalAmount: Int = {
     quarters * quarter.value +
@@ -14,9 +19,9 @@ class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
   }
   
   def clear() = {
-    quarters=0
-    dimes=0
-    nickels=0
+    cash += Quarter -> 0
+    cash += Dime -> 0
+    cash += Nickel -> 0
   }
   
   def toCoins: Seq[Coin] = {
@@ -34,9 +39,9 @@ class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
   }
   
   def +=(coins: CoinHold) = {
-    quarters += coins.quarters
-    dimes += coins.dimes
-    nickels += coins.nickels
+    cash += Quarter -> (quarters + coins.quarters)
+    cash += Dime -> (dimes + coins.dimes)
+    cash += Nickel -> (nickels + coins.nickels)
   }
   
   def removeAmountWithFewestCoins (amount: Int): Seq[Coin] = {
@@ -45,17 +50,17 @@ class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
     while(quarters > 0 && remainder >= quarter.value) {
       change += quarter
       remainder -= quarter.value
-      quarters -= 1
+      cash += Quarter -> (quarters - 1)
     }
     while(dimes > 0 && remainder >= dime.value) {
       change += dime
       remainder -= dime.value
-      dimes -= 1
+      cash += Dime -> (dimes - 1)
     }
     while(nickels > 0 && remainder >= nickel.value) {
       change += nickel
       remainder -= nickel.value
-      nickels -= 1
+      cash += Nickel -> (nickels - 1)
     }
     return change    
   }
@@ -65,9 +70,9 @@ class CoinHold(initialQuarters: Int, initialDimes: Int, initialNickels: Int) {
     coinWithValue match {
       case Some(goodCoin) => {
         goodCoin.value match {
-          case quarter.value => quarters += 1
-          case dime.value => dimes += 1
-          case nickel.value => nickels += 1
+          case quarter.value => cash += Quarter -> (quarters + 1)
+          case dime.value => cash += Dime -> (dimes + 1)
+          case nickel.value => cash += Nickel -> (nickels + 1)
         }
       }
       case None => { throw new IllegalArgumentException("The coin hold cannot accept invalid coins") }
